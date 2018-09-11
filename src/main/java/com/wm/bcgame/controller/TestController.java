@@ -4,6 +4,7 @@ import com.wm.bcgame.base.QueryMap;
 import com.wm.bcgame.dao.SysParmDao;
 import com.wm.bcgame.model.SysParm;
 import com.wm.bcgame.service.SysParmService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,10 +16,14 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/api")
 public class TestController {
+    @Value("${huobi.key}")
+    private String mykey;
+
     @Resource
     SysParmService sysParmService;
     @RequestMapping(value = "/get")
     public List<SysParm> getOne(){
+        System.out.println("=====key=====" + mykey);
         List<SysParm> sysParms = new ArrayList<SysParm>();
         QueryMap queryMap = new QueryMap();
         queryMap.put("parmValues","lzm");

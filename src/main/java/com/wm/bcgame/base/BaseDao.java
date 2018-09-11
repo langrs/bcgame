@@ -1,5 +1,7 @@
 package com.wm.bcgame.base;
 
+import com.wm.bcgame.base.QueryMap;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -7,53 +9,53 @@ public interface BaseDao<PK extends Serializable,T>
 {
     /**********************************
      * 创建实体对象
-     * @param model
-     * @return
+     * @param model 实体对象
+     * @return Long
      *********************************/
-    public Long create(T model);
+    Long create(T model);
     /**********************************
      * 更新实体对象
-     * @param model
-     * @return
+     * @param model 实体对象
+     * @return Long
      *********************************/
-    public Long update(T model);
+    Long update(T model);
     /**********************************
      * 按实体ID删除对象
-     * @param modelId
+     * @param modelId 主键
      *********************************/
-    public void delete(PK modelId);
+    void delete(PK modelId);
 
     /**********************************
      * 按实体ID获取实体
-     * @param modelId
+     * @param modelId 实体对象
      *********************************/
-    public T get(PK modelId);
+    T get(PK modelId);
 
     /**********************************
      * 取得所有查询对象
-     * @return
+     * @return List<T>
      *********************************/
-    public List<T> getAll();
+    List<T> getAll();
     /**********************************
      * 根据条件获得单个对象
      *
-     * @param map
-     * @return
+     * @param map 查询条件map
+     * @return T
      *********************************/
-    public T getOne(QueryMap map);
+    T getOne(QueryMap map);
     /**********************************
      * 根据条件获得对象列表,使用的条件都是精确查询
      *
-     * @param map
-     * @return
+     * @param map 查询条件map
+     * @return List<T>
      *********************************/
-    public List<T> getList(QueryMap map);
+    List<T> getList(QueryMap map);
     /**********************************
      * 根据条件搜索对象列表,如果条件为字符串，默认使用like来匹配
-     * @param map
-     * @return
+     * @param map 查询条件map
+     * @return List<T>
      *********************************/
-    public List<T> search(QueryMap map);
+    List<T> search(QueryMap map);
 
     //    /**
 //     * 按实体业务主键获取实体

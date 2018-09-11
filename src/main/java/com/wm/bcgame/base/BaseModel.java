@@ -11,53 +11,53 @@ import java.util.Date;
 public interface BaseModel extends Serializable {
     /**
      * 返回创建人ID
-     * @return
+     * @return Long
      */
-    public Long getCreateBy();
+    Long getCreateBy();
     /**
      * 设置设置人ID
-     * @param createBy
+     * @param createBy 创建人
      */
-    public void setCreateBy(Long createBy);
+    void setCreateBy(Long createBy);
     /**
      * 返回创建时间
-     * @return
+     * @return Date
      */
-    public Date getCreateTime();
+    Date getCreateTime();
     /**
      * 设置创建时间
-     * @param createtime
+     * @param createtime 创建时间
      */
-    public void setCreateTime(Date createtime);
+    void setCreateTime(Date createtime);
     /**
      * 返回更新时间
-     * @return
+     * @return Date
      */
-    public Date getLastModifiedTime();
+    Date getLastModifiedTime();
     /**
      * 设置更新时间
-     * @param lastModifiedTime
+     * @param lastModifiedTime 最后更新时间
      */
-    public void setLastModifiedTime(Date lastModifiedTime);
+    void setLastModifiedTime(Date lastModifiedTime);
     /**
      * 返回更新人ID
-     * @return
+     * @return Long
      */
-    public Long getLastModifiedBy();
+    Long getLastModifiedBy();
     /**
      * 设置更新人ID
-     * @param lastModifiedBy
+     * @param lastModifiedBy 最后更新人
      */
-    public void setLastModifiedBy(Long lastModifiedBy);
+    void setLastModifiedBy(Long lastModifiedBy);
     /**
      * 返回有效标志
-     * @return
+     * @return Long
      */
-    public Long getDisabled();
+    Long getDisabled();
     /**
      * 设置有效标志
-     * @param disabled
+     * @param disabled 有效标志
      */
-    public void setDisabled(Long disabled);
+    void setDisabled(Long disabled);
 
 }

@@ -33,7 +33,7 @@ public interface BaseDao<PK extends Serializable,T>
      * 按实体IDs删除记录
      * @param ids
      *********************************/
-    public void deleteByIds(PK... ids);
+     public void deleteByIds(PK... ids);
 
     /**********************************
      * 取得所有查询对象
