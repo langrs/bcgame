@@ -17,6 +17,8 @@ import org.springframework.stereotype.Service;
 public class ScheduledTaskService {
 	private final Logger logger = LoggerFactory.getLogger(Scheduled.class);
 
+	private final static String BASE_CURRENCY = "usdt";
+
 	@Value("${huobi.key}")
 	private  String API_KEY ;
 	@Value("${huobi.secret}")
@@ -28,8 +30,8 @@ public class ScheduledTaskService {
     @Scheduled(fixedRate = 120000)
     public void currencys(){
 		apiClient = new ApiClient(API_KEY,API_SECRET);
-    	String symbo = "ethusdt";
-		CurrencysResponse currencysResponse = apiClient.currencys(symbo);
+    	String symbol = "ethusdt";
+		CurrencysResponse currencysResponse = apiClient.currencys(symbol);
 		logger.info("======currencys====status:{};data:{}",currencysResponse.getStatus(),currencysResponse.getData());
 //		写入redis
 		if(currencysResponse.getStatus().equals("ok")){
@@ -38,7 +40,7 @@ public class ScheduledTaskService {
 			redisTemplate.opsForValue().set(BaseConstant.HUOBI_CURRENCY, values);
 		}
     }
-//循环获取单个symbo的信息
+//循环获取单个symbol的信息
 	@Scheduled(fixedRate = 120000)
 	public void getDetail(){
 		apiClient = new ApiClient(API_KEY,API_SECRET);
@@ -48,10 +50,10 @@ public class ScheduledTaskService {
 
     	for(String coin:arr){
     		coin = coin.trim();
-			if(coin.equals("usdt")){
+			if(coin.equals(BASE_CURRENCY)){
 				continue;
 			}
-//    		组合symbo
+//    		组合symbol
 			String symbol = coin + "usdt";
 			try{
 				DetailResponse<Details> detailResponse = apiClient.detail(symbol);

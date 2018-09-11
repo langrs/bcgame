@@ -1,5 +1,6 @@
 package com.wm.bcgame.dto;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
@@ -10,6 +11,7 @@ import java.io.Serializable;
  * @date 13:49 2018/9/11
  * @mondified
  **/
+@ApiModel(value = "RaiseRank",description = "币种涨/跌幅信息")
 public class RaiseRank implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -19,6 +21,8 @@ public class RaiseRank implements Serializable {
 	private String basePrice;
 	@ApiModelProperty(value = "涨/跌幅%")
 	private double rate;
+	@ApiModelProperty(value = "涨/跌点数")
+	private double point;
 	@ApiModelProperty(value = "成交额")
 	private double vol;
 	@ApiModelProperty(value = "成交量")
@@ -102,5 +106,13 @@ public class RaiseRank implements Serializable {
 
 	public void setRank(int rank) {
 		this.rank = rank;
+	}
+
+	public double getPoint() {
+		return point;
+	}
+
+	public void setPoint(double point) {
+		this.point = point;
 	}
 }
