@@ -23,11 +23,11 @@ public class Details {
     private double amount;
     private double open;
     private double close;
-    private int high;
+    private double high;
     private long ts;
-    private long id;
+    private Long id;
     private int count;
-    private int low;
+    private double low;
     private double vol;
 
     public double getAmount() {
@@ -54,11 +54,11 @@ public class Details {
         this.close = close;
     }
 
-    public int getHigh() {
+    public double getHigh() {
         return high;
     }
 
-    public void setHigh(int high) {
+    public void setHigh(double high) {
         this.high = high;
     }
 
@@ -70,11 +70,11 @@ public class Details {
         this.ts = ts;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -86,11 +86,11 @@ public class Details {
         this.count = count;
     }
 
-    public int getLow() {
+    public double getLow() {
         return low;
     }
 
-    public void setLow(int low) {
+    public void setLow(double low) {
         this.low = low;
     }
 

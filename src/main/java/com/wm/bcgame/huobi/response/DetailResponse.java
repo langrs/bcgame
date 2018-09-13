@@ -18,7 +18,7 @@ public class DetailResponse<T> {
 
     private String status;
     private String ch;
-    private long ts;
+    private Long ts;
     public String errCode;
     public String errMsg;
     private T tick;
@@ -39,11 +39,11 @@ public class DetailResponse<T> {
         this.ch = ch;
     }
 
-    public long getTs() {
+    public Long getTs() {
         return ts;
     }
 
-    public void setTs(long ts) {
+    public void setTs(Long ts) {
         this.ts = ts;
     }
 

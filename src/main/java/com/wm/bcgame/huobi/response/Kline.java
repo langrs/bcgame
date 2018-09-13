@@ -7,8 +7,6 @@ package com.wm.bcgame.huobi.response;
  */
 
 public class Kline {
-
-
     private long id;
     private double amount;
     private int count;
@@ -18,67 +16,81 @@ public class Kline {
     private double high;
     private double vol;
 
-    public long getId() {
-        return id;
-    }
+	public long getId() {
+		return id;
+	}
 
-    public void setId(long id) {
-        this.id = id;
-    }
+	public void setId(long id) {
+		this.id = id;
+	}
 
-    public double getAmount() {
-        return amount;
-    }
+	public double getAmount() {
+		return amount;
+	}
 
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
+	public void setAmount(double amount) {
+		this.amount = amount;
+	}
 
-    public int getCount() {
-        return count;
-    }
+	public int getCount() {
+		return count;
+	}
 
-    public void setCount(int count) {
-        this.count = count;
-    }
+	public void setCount(int count) {
+		this.count = count;
+	}
 
-    public double getOpen() {
-        return open;
-    }
+	public double getOpen() {
+		return open;
+	}
 
-    public void setOpen(double open) {
-        this.open = open;
-    }
+	public void setOpen(double open) {
+		this.open = open;
+	}
 
-    public double getClose() {
-        return close;
-    }
+	public double getClose() {
+		return close;
+	}
 
-    public void setClose(int close) {
-        this.close = close;
-    }
+	public void setClose(double close) {
+		this.close = close;
+	}
 
-    public double getLow() {
-        return low;
-    }
+	public double getLow() {
+		return low;
+	}
 
-    public void setLow(int low) {
-        this.low = low;
-    }
+	public void setLow(double low) {
+		this.low = low;
+	}
 
-    public double getHigh() {
-        return high;
-    }
+	public double getHigh() {
+		return high;
+	}
 
-    public void setHigh(int high) {
-        this.high = high;
-    }
+	public void setHigh(double high) {
+		this.high = high;
+	}
 
-    public double getVol() {
-        return vol;
-    }
+	public double getVol() {
+		return vol;
+	}
 
-    public void setVol(double vol) {
-        this.vol = vol;
-    }
+	public void setVol(double vol) {
+		this.vol = vol;
+	}
+
+	@Override
+	public String toString() {
+		return "Kline{" +
+				"id=" + id +
+				", amount=" + amount +
+				", count=" + count +
+				", open=" + open +
+				", close=" + close +
+				", low=" + low +
+				", high=" + high +
+				", vol=" + vol +
+				'}';
+	}
 }

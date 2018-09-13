@@ -16,17 +16,19 @@ public class RaiseRank implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@ApiModelProperty(value = "币种")
-	private String coin;
+	private String coinNo;
 	@ApiModelProperty(value = "计价货币")
 	private String basePrice;
 	@ApiModelProperty(value = "涨/跌幅%")
 	private double rate;
 	@ApiModelProperty(value = "涨/跌点数")
 	private double point;
-	@ApiModelProperty(value = "成交额")
+	@ApiModelProperty(value = "24H成交数--交易笔数")
+	private int count;
+	@ApiModelProperty(value = "24H成交额--币交易数量")
+	private double amount;
+	@ApiModelProperty(value = "24H累计成交量--成交总金额")
 	private double vol;
-	@ApiModelProperty(value = "成交量")
-	private double count;
 	@ApiModelProperty(value = "开盘价")
 	private double open;
 	@ApiModelProperty(value = "收盘价")
@@ -36,12 +38,12 @@ public class RaiseRank implements Serializable {
 	@ApiModelProperty(value = "排名")
 	private int rank;
 
-	public String getCoin() {
-		return coin;
+	public String getCoinNo() {
+		return coinNo;
 	}
 
-	public void setCoin(String coin) {
-		this.coin = coin;
+	public void setCoinNo(String coinNo) {
+		this.coinNo = coinNo;
 	}
 
 	public String getBasePrice() {
@@ -60,20 +62,36 @@ public class RaiseRank implements Serializable {
 		this.rate = rate;
 	}
 
+	public double getPoint() {
+		return point;
+	}
+
+	public void setPoint(double point) {
+		this.point = point;
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
+	public double getAmount() {
+		return amount;
+	}
+
+	public void setAmount(double amount) {
+		this.amount = amount;
+	}
+
 	public double getVol() {
 		return vol;
 	}
 
 	public void setVol(double vol) {
 		this.vol = vol;
-	}
-
-	public double getCount() {
-		return count;
-	}
-
-	public void setCount(double count) {
-		this.count = count;
 	}
 
 	public double getOpen() {
@@ -106,13 +124,5 @@ public class RaiseRank implements Serializable {
 
 	public void setRank(int rank) {
 		this.rank = rank;
-	}
-
-	public double getPoint() {
-		return point;
-	}
-
-	public void setPoint(double point) {
-		this.point = point;
 	}
 }

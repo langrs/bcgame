@@ -1,16 +1,18 @@
 package com.wm.bcgame.controller;
 
-import com.wm.bcgame.dto.CoinInfo;
-import com.wm.bcgame.dto.CoinKline;
-import com.wm.bcgame.dto.ResponseDto;
-import com.wm.bcgame.dto.RaiseRank;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.wm.bcgame.base.BaseConstant;
+import com.wm.bcgame.dto.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,25 +29,75 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/coinList")
-@Api("获取币种相关信息")
+@Api(value = "获取币种相关信息", description = "获取币种相关信息")
 public class CoinController {
-	private static final Logger logger= LoggerFactory.getLogger(CoinController.class);
+	private static final Logger logger = LoggerFactory.getLogger(CoinController.class);
 
 	@Autowired
-	RedisTemplate redisTemplate;
+	StringRedisTemplate stringRedisTemplate;
 
 	@ApiOperation(value = "涨幅榜", notes = "获取按涨幅排位的前30位币种信息")
-	@ApiImplicitParam(name = "raiseType", value = "涨跌标志 涨幅0/跌幅1", paramType = "path", required = true, dataType = "Integer")
-	@RequestMapping(value = "/raiseRank/{raiseType}", method = RequestMethod.GET)
-	public ResponseDto<List<RaiseRank>> raiseRank(@PathVariable Integer raiseType){
+	@ApiImplicitParam(name = "raiseType", value = "涨跌标志 涨幅0/跌幅1", paramType = "query", required = true, dataType = "Integer")
+	@RequestMapping(value = "/raiseRank", method = RequestMethod.POST)
+	public ResponseDto<List<RaiseRank>> raiseRank(@ApiParam Integer raiseType) {
 		System.out.println("========:" + raiseType);
 		return null;
 	}
+
 	@ApiOperation(value = "币种详细信息", notes = "获取币种的详细信息和K线图信息")
-	@ApiImplicitParam(name = "coin", value = "币种", paramType = "path", required = true, dataType = "String")
-	@RequestMapping(value = "/coinInfo/{coin}", method = RequestMethod.GET)
-	public ResponseDto<CoinInfo> coinInfo(@PathVariable String coin){
+	@ApiImplicitParam(name = "coin", value = "币种", paramType = "query", required = true, dataType = "String")
+	@RequestMapping(value = "/coinInfo", method = RequestMethod.POST)
+	public ResponseDto<CoinInfo> coinInfo(@ApiParam String coin) {
+		ResponseDto responseDto = new ResponseDto();
+		Gson gson = new Gson();
+		CoinInfo coinInfo = new CoinInfo();
 		System.out.println("=========" + coin);
-		return null;
+		String symbol = coin.trim() + "usdt";
+//		获取币种详细信息
+		String values = stringRedisTemplate.opsForValue().get(BaseConstant.HUOBI_CURRENCY_DETAIL + symbol);
+		CoinSingle coinSingle = gson.fromJson(values, CoinSingle.class);
+//		coinInfo.setOpen(coinSingle.getOpen());
+//		coinInfo.setClose(coinSingle.getClose());
+//		coinInfo.setHigh(coinSingle.getHigh());
+//		coinInfo.setLow(coinSingle.getLow());
+//		coinInfo.setAmount(coinSingle.getAmount());
+//		coinInfo.setCount(coinSingle.getCount());
+//		coinInfo.setVol(coinSingle.getVol());
+		coinInfo.setTs(coinSingle.getTs());
+//先都给默认值
+		coinInfo.setCoinNo(coin);
+		coinInfo.setName("默认");
+		coinInfo.setDescription("默认");
+		coinInfo.setDistributionAmt("10000000");
+		coinInfo.setMarketAmt("1000000");
+		coinInfo.setTurnoverAmt("1000000");
+		coinInfo.setWebsiteAddr("www.huobi.com");
+		coinInfo.setWhitePaper("www.huobi.com");
+		coinInfo.setIssueDate("2000-01-01");
+
+//		日k线
+		values = stringRedisTemplate.opsForValue().get(BaseConstant.HUOBI_CURRENCY_KLINE_DAY + symbol);
+		List<CoinKline> coinKlinesDay = gson.fromJson(values, new TypeToken<List<CoinKline>>() {
+		}.getType());
+		coinInfo.setkLineDay(coinKlinesDay);
+//		周k线
+		values = stringRedisTemplate.opsForValue().get(BaseConstant.HUOBI_CURRENCY_KLINE_WEEK + symbol);
+		List<CoinKline> coinKlinesWeek = gson.fromJson(values, new TypeToken<List<CoinKline>>() {
+		}.getType());
+		coinInfo.setkLineWeek(coinKlinesWeek);
+		//		月k线
+		values = stringRedisTemplate.opsForValue().get(BaseConstant.HUOBI_CURRENCY_KLINE_MONTH + symbol);
+		List<CoinKline> coinKlinesMonth = gson.fromJson(values, new TypeToken<List<CoinKline>>() {
+		}.getType());
+		coinInfo.setkLineMonth(coinKlinesMonth);
+		//		年k线
+		values = stringRedisTemplate.opsForValue().get(BaseConstant.HUOBI_CURRENCY_KLINE_YEAR + symbol);
+		List<CoinKline> coinKlinesYear = gson.fromJson(values, new TypeToken<List<CoinKline>>() {
+		}.getType());
+		coinInfo.setkLineYear(coinKlinesYear);
+		responseDto.setStatus("ok");
+		responseDto.setData(coinInfo);
+		return responseDto;
 	}
+
 }

@@ -1,9 +1,7 @@
 package com.wm.bcgame.huobi.api;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.wm.bcgame.huobi.response.CurrencysResponse;
-import com.wm.bcgame.huobi.response.DetailResponse;
-import com.wm.bcgame.huobi.response.Details;
+import com.wm.bcgame.huobi.response.*;
 import okhttp3.*;
 
 import javax.xml.bind.DatatypeConverter;
@@ -14,6 +12,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -90,6 +89,24 @@ public class ApiClient {
 			HashMap map = new HashMap();
 		map.put("symbol", symbol);
 		DetailResponse resp = get("/market/detail", map, new TypeReference<DetailResponse<Details>>() {
+		});
+		return resp;
+	}
+
+	/**
+	 * GET /market/history/kline 获取K线数据
+	 *
+	 * @param symbol
+	 * @param period
+	 * @param size
+	 * @return
+	 */
+	public KlineResponse kline(String symbol, String period, String size) {
+		HashMap map = new HashMap();
+		map.put("symbol", symbol);
+		map.put("period", period);
+		map.put("size", size);
+		KlineResponse resp = get("/market/history/kline", map, new TypeReference<KlineResponse<List<Kline>>>() {
 		});
 		return resp;
 	}

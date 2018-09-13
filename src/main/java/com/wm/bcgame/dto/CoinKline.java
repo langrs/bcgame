@@ -16,83 +16,43 @@ public class CoinKline implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@ApiModelProperty(value = "统计时间--毫秒")
-	private Number ts;
-	@ApiModelProperty(value = "24H成交数--交易笔数")
-	private int count;
-	@ApiModelProperty(value = "24H成交额--币交易数量")
-	private double amount;
+	private Long ts;
 	@ApiModelProperty(value = "24H累计成交量--成交总金额")
-	private double vol;
-	@ApiModelProperty(value = "开盘价")
-	private double open;
-	@ApiModelProperty(value = "收盘价")
-	private double close;
-	@ApiModelProperty(value = "24H最高价")
-	private int high;
-	@ApiModelProperty(value = "24H最低价")
-	private int low;
+	private double volRmb;
+	@ApiModelProperty(value = "收盘价--人民币")
+	private double closeRmb;
+	@ApiModelProperty(value = "收盘价--美元")
+	private double closeUsd;
 
-	public Number getTs() {
+	public Long getTs() {
 		return ts;
 	}
 
-	public void setTs(Number ts) {
+	public void setTs(Long ts) {
 		this.ts = ts;
 	}
 
-	public int getCount() {
-		return count;
+	public double getVolRmb() {
+		return volRmb;
 	}
 
-	public void setCount(int count) {
-		this.count = count;
+	public void setVolRmb(double volRmb) {
+		this.volRmb = volRmb;
 	}
 
-	public double getAmount() {
-		return amount;
+	public double getCloseRmb() {
+		return closeRmb;
 	}
 
-	public void setAmount(double amount) {
-		this.amount = amount;
+	public void setCloseRmb(double closeRmb) {
+		this.closeRmb = closeRmb;
 	}
 
-	public double getVol() {
-		return vol;
+	public double getCloseUsdt() {
+		return closeUsd;
 	}
 
-	public void setVol(double vol) {
-		this.vol = vol;
-	}
-
-	public double getOpen() {
-		return open;
-	}
-
-	public void setOpen(double open) {
-		this.open = open;
-	}
-
-	public double getClose() {
-		return close;
-	}
-
-	public void setClose(double close) {
-		this.close = close;
-	}
-
-	public int getHigh() {
-		return high;
-	}
-
-	public void setHigh(int high) {
-		this.high = high;
-	}
-
-	public int getLow() {
-		return low;
-	}
-
-	public void setLow(int low) {
-		this.low = low;
+	public void setCloseUsdt(double closeUsdt) {
+		this.closeUsd = closeUsdt;
 	}
 }
