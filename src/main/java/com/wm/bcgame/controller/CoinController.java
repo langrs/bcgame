@@ -53,16 +53,16 @@ public class CoinController {
 		CoinInfo coinInfo = new CoinInfo();
 		System.out.println("=========" + coin);
 		String symbol = coin.trim() + "usdt";
+		//		获取兑换的汇率rmb usdt
+		double exchangeRate = Double.valueOf(stringRedisTemplate.opsForValue().get(BaseConstant.EXCHANGE_RATE_RMB_USD));
 //		获取币种详细信息
 		String values = stringRedisTemplate.opsForValue().get(BaseConstant.HUOBI_CURRENCY_DETAIL + symbol);
 		CoinSingle coinSingle = gson.fromJson(values, CoinSingle.class);
-//		coinInfo.setOpen(coinSingle.getOpen());
-//		coinInfo.setClose(coinSingle.getClose());
-//		coinInfo.setHigh(coinSingle.getHigh());
-//		coinInfo.setLow(coinSingle.getLow());
-//		coinInfo.setAmount(coinSingle.getAmount());
-//		coinInfo.setCount(coinSingle.getCount());
-//		coinInfo.setVol(coinSingle.getVol());
+		coinInfo.setCloseUsd(coinSingle.getClose());
+		coinInfo.setCloseRmb(coinSingle.getClose() * exchangeRate);
+		coinInfo.setHighRmb(coinSingle.getHigh() * exchangeRate);
+		coinInfo.setLowRmb(coinSingle.getLow() * exchangeRate);
+		coinInfo.setVolRmb(coinSingle.getVol() * exchangeRate);
 		coinInfo.setTs(coinSingle.getTs());
 //先都给默认值
 		coinInfo.setCoinNo(coin);
