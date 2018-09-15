@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -38,15 +39,36 @@ public class CoinController {
 
 	@ApiOperation(value = "涨幅榜", notes = "获取按涨幅排位的前30位币种信息")
 	@ApiImplicitParam(name = "raiseType", value = "涨跌标志 涨幅0/跌幅1", paramType = "query", required = true, dataType = "Integer")
-	@RequestMapping(value = "/raiseRank", method = RequestMethod.POST)
+	@RequestMapping(value = "/raiseRank", method =  RequestMethod.POST)
 	public ResponseDto<List<RaiseRank>> raiseRank(@ApiParam Integer raiseType) {
-		System.out.println("========:" + raiseType);
-		return null;
+		ResponseDto responseDto = new ResponseDto();
+		List<RaiseRank> raiseRanks = new ArrayList<>();
+		RaiseRank raiseRank = new RaiseRank();
+		raiseRank.setCoinNo("eth");
+		raiseRank.setRate(12.2D);
+		raiseRank.setCloseRmb(11.3D);
+		raiseRank.setCloseUsd(1.2D);
+		raiseRank.setRank(1);
+		raiseRank.setVolRmb(3223221.2232D);
+		raiseRanks.add(raiseRank);
+		RaiseRank raiseRank1 = new RaiseRank();
+		raiseRank1.setCoinNo("btc");
+		raiseRank1.setRate(12.2D);
+		raiseRank1.setCloseRmb(11.3D);
+		raiseRank1.setCloseUsd(1.2D);
+		raiseRank1.setRank(1);
+		raiseRank1.setVolRmb(3223221.2232D);
+		raiseRanks.add(raiseRank1);
+		responseDto.setStatus("ok");
+		responseDto.setErrCode("0");
+		responseDto.setErrMsg("正常返回");
+		responseDto.setData(raiseRanks);
+		return responseDto;
 	}
 
 	@ApiOperation(value = "币种详细信息", notes = "获取币种的详细信息和K线图信息")
 	@ApiImplicitParam(name = "coin", value = "币种", paramType = "query", required = true, dataType = "String")
-	@RequestMapping(value = "/coinInfo", method = RequestMethod.POST)
+	@RequestMapping(value = "/coinInfo", method =  RequestMethod.POST)
 	public ResponseDto<CoinInfo> coinInfo(@ApiParam String coin) {
 		ResponseDto responseDto = new ResponseDto();
 		Gson gson = new Gson();
