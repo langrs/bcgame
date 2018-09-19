@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wm.bcgame.dao.UserHistoryDao">
+    <resultMap id="UserHistory" type="com.wm.bcgame.model.UserHistory">
+		<id property="id" column="id" jdbcType="NUMERIC" />
+		<result property= "userId" column="user_id" jdbcType="NUMERIC" />
+		<result property= "historyType" column="history_type" jdbcType="NUMERIC" />
+		<result property= "historyId" column="history_id" jdbcType="NUMERIC" />
+		<result property= "disabled" column="disabled" jdbcType="NUMERIC" />
+		<result property= "createTime" column="create_time" jdbcType="TIMESTAMP" />
+		<result property= "createBy" column="create_by" jdbcType="NUMERIC" />
+		<result property= "lastModifiedTime" column="last_modified_time" jdbcType="TIMESTAMP" />
+		<result property= "lastModifiedBy" column="last_modified_by" jdbcType="NUMERIC" />
+    </resultMap>
+
+    <sql id="whereId">
+        id=#{id}
+    </sql>
+
+    <sql id="columns">
+            id,
+            user_id,
+            history_type,
+            history_id,
+            disabled,
+            create_time,
+            create_by,
+            last_modified_time,
+            last_modified_by
+    </sql>
+
+    <sql id="dynamicWhere">
+        <where>
+       	<if test="id != null"> AND id like '%${id}%' </if>
+       	<if test="userId != null"> AND user_id like '%${userId}%' </if>
+       	<if test="historyType != null"> AND history_type like '%${historyType}%' </if>
+       	<if test="historyId != null"> AND history_id like '%${historyId}%' </if>
+       	<if test="disabled != null"> AND disabled like '%${disabled}%' </if>
+       	<if test="createTime != null"> AND create_time = #{createTime}</if>
+       	<if test="createBy != null"> AND create_by like '%${createBy}%' </if>
+       	<if test="lastModifiedTime != null"> AND last_modified_time = #{lastModifiedTime}</if>
+       	<if test="lastModifiedBy != null"> AND last_modified_by like '%${lastModifiedBy}%' </if>
+        </where>
+    </sql>
+
+    <sql id="oneWhere">
+        <where>
+            <if test="id != null"> AND id = #{id}</if>
+            <if test="userId != null"> AND user_id = #{userId}</if>
+            <if test="historyType != null"> AND history_type = #{historyType}</if>
+            <if test="historyId != null"> AND history_id = #{historyId}</if>
+            <if test="disabled != null"> AND disabled = #{disabled}</if>
+            <if test="createTime != null"> AND create_time = #{createTime}</if>
+            <if test="createBy != null"> AND create_by = #{createBy}</if>
+            <if test="lastModifiedTime != null"> AND last_modified_time = #{lastModifiedTime}</if>
+            <if test="lastModifiedBy != null"> AND last_modified_by = #{lastModifiedBy}</if>
+        </where>
+    </sql>
+
+    <insert id="create" parameterType="com.wm.bcgame.model.UserHistory">
+        INSERT INTO t_user_history
+        (<include refid="columns"/>)
+        VALUES(
+                #{id,jdbcType=NUMERIC},
+                #{userId,jdbcType=NUMERIC},
+                #{historyType,jdbcType=NUMERIC},
+                #{historyId,jdbcType=NUMERIC},
+                #{disabled,jdbcType=NUMERIC},
+                #{createTime,jdbcType=TIMESTAMP},
+                #{createBy,jdbcType=NUMERIC},
+                #{lastModifiedTime,jdbcType=TIMESTAMP},
+                #{lastModifiedBy,jdbcType=NUMERIC}
+        )
+    </insert>
+
+    <delete id="delete" parameterType="java.lang.Long">
+        DELETE FROM t_user_history
+        WHERE
+        <include refid="whereId"/>
+    </delete>
+    <update id="update" parameterType="com.wm.bcgame.model.UserHistory">
+        UPDATE t_user_history SET
+                id=#{id,jdbcType=NUMERIC},
+                user_id=#{userId,jdbcType=NUMERIC},
+                history_type=#{historyType,jdbcType=NUMERIC},
+                history_id=#{historyId,jdbcType=NUMERIC},
+                disabled=#{disabled,jdbcType=NUMERIC},
+                create_time=#{createTime,jdbcType=TIMESTAMP},
+                create_by=#{createBy,jdbcType=NUMERIC},
+                last_modified_time=#{lastModifiedTime,jdbcType=TIMESTAMP},
+                last_modified_by=#{lastModifiedBy,jdbcType=NUMERIC}
+        WHERE
+        <include refid="whereId"/>
+    </update>
+
+    <select id="get" parameterType="java.lang.Long" resultMap="UserHistory">
+        SELECT <include refid="columns"/>
+        FROM t_user_history
+        WHERE
+        <include refid="whereId"/>
+    </select>
+
+    <select id="query" resultMap="UserHistory">
+        SELECT <include refid="columns"/>
+        FROM t_user_history
+        <include refid="dynamicWhere" />
+    </select>
+    <select id="search" resultMap="UserHistory">
+        SELECT <include refid="columns"/>
+        FROM t_user_history
+        <include refid="dynamicWhere" />
+    </select>
+    <select id="getOne" resultMap="UserHistory">
+        SELECT <include refid="columns"/>
+        FROM t_user_history
+        <include refid="oneWhere" />
+    </select>
+
+    <select id="getList" resultMap="UserHistory">
+        SELECT <include refid="columns"/>
+        FROM t_user_history
+        <include refid="oneWhere" />
+    </select>
+
+    <select id="getAll" resultMap="UserHistory">
+        SELECT <include refid="columns"/>
+        FROM t_user_history
+    </select>
+</mapper>

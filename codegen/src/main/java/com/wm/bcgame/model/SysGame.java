@@ -17,7 +17,9 @@ public class SysGame extends AbstractModel {
     //
     private Long id;
     //游戏名称
-    private String gameName;
+    private String name;
+    //游戏图标
+    private String icon;
     //代币
     private Long coinId;
     //描述
@@ -25,7 +27,7 @@ public class SysGame extends AbstractModel {
     //介绍
     private String introduce;
     //排序权重
-    private Long position;
+    private Long pos;
     //热度
     private Long heat;
     //参与人数
@@ -42,12 +44,19 @@ public class SysGame extends AbstractModel {
     public void setid(Long id) {
         this.id = id;
     }
-    public String getgameName() {
-        return this.gameName;
+    public String getname() {
+        return this.name;
     }
 
-    public void setgameName(String gameName) {
-        this.gameName = gameName;
+    public void setname(String name) {
+        this.name = name;
+    }
+    public String geticon() {
+        return this.icon;
+    }
+
+    public void seticon(String icon) {
+        this.icon = icon;
     }
     public Long getcoinId() {
         return this.coinId;
@@ -70,12 +79,12 @@ public class SysGame extends AbstractModel {
     public void setintroduce(String introduce) {
         this.introduce = introduce;
     }
-    public Long getposition() {
-        return this.position;
+    public Long getpos() {
+        return this.pos;
     }
 
-    public void setposition(Long position) {
-        this.position = position;
+    public void setpos(Long pos) {
+        this.pos = pos;
     }
     public Long getheat() {
         return this.heat;

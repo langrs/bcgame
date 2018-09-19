@@ -3,11 +3,12 @@
 <mapper namespace="com.wm.bcgame.dao.SysGameDao">
     <resultMap id="SysGame" type="com.wm.bcgame.model.SysGame">
 		<id property="id" column="id" jdbcType="NUMERIC" />
-		<result property= "gameName" column="game_name" jdbcType="VARCHAR" />
+		<result property= "name" column="name" jdbcType="VARCHAR" />
+		<result property= "icon" column="icon" jdbcType="VARCHAR" />
 		<result property= "coinId" column="coin_id" jdbcType="NUMERIC" />
 		<result property= "description" column="description" jdbcType="VARCHAR" />
 		<result property= "introduce" column="introduce" jdbcType="VARCHAR" />
-		<result property= "position" column="position" jdbcType="NUMERIC" />
+		<result property= "pos" column="pos" jdbcType="NUMERIC" />
 		<result property= "heat" column="heat" jdbcType="NUMERIC" />
 		<result property= "players" column="players" jdbcType="NUMERIC" />
 		<result property= "trend" column="trend" jdbcType="NUMERIC" />
@@ -25,11 +26,12 @@
 
     <sql id="columns">
             id,
-            game_name,
+            name,
+            icon,
             coin_id,
             description,
             introduce,
-            position,
+            pos,
             heat,
             players,
             trend,
@@ -44,11 +46,12 @@
     <sql id="dynamicWhere">
         <where>
        	<if test="id != null"> AND id like '%${id}%' </if>
-       	<if test="gameName != null"> AND game_name like '%${gameName}%' </if>
+       	<if test="name != null"> AND name like '%${name}%' </if>
+       	<if test="icon != null"> AND icon like '%${icon}%' </if>
        	<if test="coinId != null"> AND coin_id like '%${coinId}%' </if>
        	<if test="description != null"> AND description like '%${description}%' </if>
        	<if test="introduce != null"> AND introduce like '%${introduce}%' </if>
-       	<if test="position != null"> AND position like '%${position}%' </if>
+       	<if test="pos != null"> AND pos like '%${pos}%' </if>
        	<if test="heat != null"> AND heat like '%${heat}%' </if>
        	<if test="players != null"> AND players like '%${players}%' </if>
        	<if test="trend != null"> AND trend like '%${trend}%' </if>
@@ -64,11 +67,12 @@
     <sql id="oneWhere">
         <where>
             <if test="id != null"> AND id = #{id}</if>
-            <if test="gameName != null"> AND game_name = #{gameName}</if>
+            <if test="name != null"> AND name = #{name}</if>
+            <if test="icon != null"> AND icon = #{icon}</if>
             <if test="coinId != null"> AND coin_id = #{coinId}</if>
             <if test="description != null"> AND description = #{description}</if>
             <if test="introduce != null"> AND introduce = #{introduce}</if>
-            <if test="position != null"> AND position = #{position}</if>
+            <if test="pos != null"> AND pos = #{pos}</if>
             <if test="heat != null"> AND heat = #{heat}</if>
             <if test="players != null"> AND players = #{players}</if>
             <if test="trend != null"> AND trend = #{trend}</if>
@@ -86,11 +90,12 @@
         (<include refid="columns"/>)
         VALUES(
                 #{id,jdbcType=NUMERIC},
-                #{gameName,jdbcType=VARCHAR},
+                #{name,jdbcType=VARCHAR},
+                #{icon,jdbcType=VARCHAR},
                 #{coinId,jdbcType=NUMERIC},
                 #{description,jdbcType=VARCHAR},
                 #{introduce,jdbcType=VARCHAR},
-                #{position,jdbcType=NUMERIC},
+                #{pos,jdbcType=NUMERIC},
                 #{heat,jdbcType=NUMERIC},
                 #{players,jdbcType=NUMERIC},
                 #{trend,jdbcType=NUMERIC},
@@ -111,11 +116,12 @@
     <update id="update" parameterType="com.wm.bcgame.model.SysGame">
         UPDATE t_sys_game SET
                 id=#{id,jdbcType=NUMERIC},
-                game_name=#{gameName,jdbcType=VARCHAR},
+                name=#{name,jdbcType=VARCHAR},
+                icon=#{icon,jdbcType=VARCHAR},
                 coin_id=#{coinId,jdbcType=NUMERIC},
                 description=#{description,jdbcType=VARCHAR},
                 introduce=#{introduce,jdbcType=VARCHAR},
-                position=#{position,jdbcType=NUMERIC},
+                pos=#{pos,jdbcType=NUMERIC},
                 heat=#{heat,jdbcType=NUMERIC},
                 players=#{players,jdbcType=NUMERIC},
                 trend=#{trend,jdbcType=NUMERIC},

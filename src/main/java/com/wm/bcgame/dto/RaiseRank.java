@@ -17,23 +17,13 @@ public class RaiseRank implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@ApiModelProperty(value = "币种")
 	private String coinNo;
-	@ApiModelProperty(value = "计价货币")
-	private String basePrice;
 	@ApiModelProperty(value = "涨/跌幅%")
 	private double rate;
-	@ApiModelProperty(value = "涨/跌点数")
-	private double point;
-	@ApiModelProperty(value = "24H成交数--交易笔数")
-	private int count;
-	@ApiModelProperty(value = "24H成交额--币交易数量")
-	private double amount;
-	@ApiModelProperty(value = "24H累计成交量--成交总金额")
-	private double vol;
-	@ApiModelProperty(value = "开盘价")
-	private double open;
-	@ApiModelProperty(value = "收盘价")
-	private double close;
-	@ApiModelProperty(value = "成交价--人民币计价")
+	@ApiModelProperty(value = "24H累计成交量--成交总金额RMB")
+	private double volRmb;
+	@ApiModelProperty(value = "收盘价--USD")
+	private double closeUsd;
+	@ApiModelProperty(value = "成交价--RMB")
 	private double closeRmb;
 	@ApiModelProperty(value = "排名")
 	private int rank;
@@ -46,14 +36,6 @@ public class RaiseRank implements Serializable {
 		this.coinNo = coinNo;
 	}
 
-	public String getBasePrice() {
-		return basePrice;
-	}
-
-	public void setBasePrice(String basePrice) {
-		this.basePrice = basePrice;
-	}
-
 	public double getRate() {
 		return rate;
 	}
@@ -62,52 +44,20 @@ public class RaiseRank implements Serializable {
 		this.rate = rate;
 	}
 
-	public double getPoint() {
-		return point;
+	public double getVolRmb() {
+		return volRmb;
 	}
 
-	public void setPoint(double point) {
-		this.point = point;
+	public void setVolRmb(double volRmb) {
+		this.volRmb = volRmb;
 	}
 
-	public int getCount() {
-		return count;
+	public double getCloseUsd() {
+		return closeUsd;
 	}
 
-	public void setCount(int count) {
-		this.count = count;
-	}
-
-	public double getAmount() {
-		return amount;
-	}
-
-	public void setAmount(double amount) {
-		this.amount = amount;
-	}
-
-	public double getVol() {
-		return vol;
-	}
-
-	public void setVol(double vol) {
-		this.vol = vol;
-	}
-
-	public double getOpen() {
-		return open;
-	}
-
-	public void setOpen(double open) {
-		this.open = open;
-	}
-
-	public double getClose() {
-		return close;
-	}
-
-	public void setClose(double close) {
-		this.close = close;
+	public void setCloseUsd(double closeUsd) {
+		this.closeUsd = closeUsd;
 	}
 
 	public double getCloseRmb() {

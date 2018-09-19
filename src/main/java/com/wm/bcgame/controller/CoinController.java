@@ -30,7 +30,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/coinList")
-@Api(value = "获取币种相关信息", description = "获取币种相关信息")
+@Api(value = "币种相关", description = "币种相关")
 public class CoinController {
 	private static final Logger logger = LoggerFactory.getLogger(CoinController.class);
 
@@ -40,8 +40,10 @@ public class CoinController {
 	@ApiOperation(value = "涨幅榜", notes = "获取按涨幅排位的前30位币种信息")
 	@ApiImplicitParam(name = "raiseType", value = "涨跌标志 涨幅0/跌幅1", paramType = "query", required = true, dataType = "Integer")
 	@RequestMapping(value = "/raiseRank", method =  RequestMethod.POST)
-	public ResponseDto<List<RaiseRank>> raiseRank(@ApiParam Integer raiseType) {
-		ResponseDto responseDto = new ResponseDto();
+	public ResponseDto<DataDto<List<RaiseRank>>> raiseRank(@ApiParam Integer raiseType) {
+		ResponseDto<DataDto<List<RaiseRank>>> responseDto = new ResponseDto();
+		DataDto<List<RaiseRank>> dataDto = new DataDto<>();
+
 		List<RaiseRank> raiseRanks = new ArrayList<>();
 		RaiseRank raiseRank = new RaiseRank();
 		raiseRank.setCoinNo("eth");
@@ -59,10 +61,9 @@ public class CoinController {
 		raiseRank1.setRank(1);
 		raiseRank1.setVolRmb(3223221.2232D);
 		raiseRanks.add(raiseRank1);
-		responseDto.setStatus("ok");
-		responseDto.setErrCode("0");
-		responseDto.setErrMsg("正常返回");
-		responseDto.setData(raiseRanks);
+		responseDto.setStatus(BaseConstant.STATUS_OK);
+		dataDto.setDataList(raiseRanks);
+		responseDto.setData(dataDto);
 		return responseDto;
 	}
 

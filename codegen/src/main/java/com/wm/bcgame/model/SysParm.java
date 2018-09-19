@@ -21,7 +21,7 @@ public class SysParm extends AbstractModel {
     //
     private String parmValues;
     //
-    private String parmDescr;
+    private String description;
 ///////////////////////////////////////////////////////////////
     public Long getid() {
         return this.id;
@@ -44,12 +44,12 @@ public class SysParm extends AbstractModel {
     public void setparmValues(String parmValues) {
         this.parmValues = parmValues;
     }
-    public String getparmDescr() {
-        return this.parmDescr;
+    public String getdescription() {
+        return this.description;
     }
 
-    public void setparmDescr(String parmDescr) {
-        this.parmDescr = parmDescr;
+    public void setdescription(String description) {
+        this.description = description;
     }
 
 }

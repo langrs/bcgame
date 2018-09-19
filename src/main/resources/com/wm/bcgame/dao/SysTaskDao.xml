@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wm.bcgame.dao.SysTaskDao">
+    <resultMap id="SysTask" type="com.wm.bcgame.model.SysTask">
+		<id property="id" column="id" jdbcType="NUMERIC" />
+		<result property= "taskType" column="task_type" jdbcType="NUMERIC" />
+		<result property= "taskName" column="task_name" jdbcType="VARCHAR" />
+		<result property= "taskPic" column="task_pic" jdbcType="VARCHAR" />
+		<result property= "rewardType" column="reward_type" jdbcType="NUMERIC" />
+		<result property= "taskReward" column="task_reward" jdbcType="VARCHAR" />
+		<result property= "taskCondition" column="task_condition" jdbcType="VARCHAR" />
+		<result property= "expire" column="expire" jdbcType="TIMESTAMP" />
+		<result property= "hidden" column="hidden" jdbcType="NUMERIC" />
+		<result property= "memo" column="memo" jdbcType="VARCHAR" />
+		<result property= "disabled" column="disabled" jdbcType="NUMERIC" />
+		<result property= "createTime" column="create_time" jdbcType="TIMESTAMP" />
+		<result property= "createBy" column="create_by" jdbcType="NUMERIC" />
+		<result property= "lastModifiedTime" column="last_modified_time" jdbcType="TIMESTAMP" />
+		<result property= "lastModifiedBy" column="last_modified_by" jdbcType="NUMERIC" />
+    </resultMap>
+
+    <sql id="whereId">
+        id=#{id}
+    </sql>
+
+    <sql id="columns">
+            id,
+            task_type,
+            task_name,
+            task_pic,
+            reward_type,
+            task_reward,
+            task_condition,
+            expire,
+            hidden,
+            memo,
+            disabled,
+            create_time,
+            create_by,
+            last_modified_time,
+            last_modified_by
+    </sql>
+
+    <sql id="dynamicWhere">
+        <where>
+       	<if test="id != null"> AND id like '%${id}%' </if>
+       	<if test="taskType != null"> AND task_type like '%${taskType}%' </if>
+       	<if test="taskName != null"> AND task_name like '%${taskName}%' </if>
+       	<if test="taskPic != null"> AND task_pic like '%${taskPic}%' </if>
+       	<if test="rewardType != null"> AND reward_type like '%${rewardType}%' </if>
+       	<if test="taskReward != null"> AND task_reward like '%${taskReward}%' </if>
+       	<if test="taskCondition != null"> AND task_condition like '%${taskCondition}%' </if>
+       	<if test="expire != null"> AND expire = #{expire}</if>
+       	<if test="hidden != null"> AND hidden like '%${hidden}%' </if>
+       	<if test="memo != null"> AND memo like '%${memo}%' </if>
+       	<if test="disabled != null"> AND disabled like '%${disabled}%' </if>
+       	<if test="createTime != null"> AND create_time = #{createTime}</if>
+       	<if test="createBy != null"> AND create_by like '%${createBy}%' </if>
+       	<if test="lastModifiedTime != null"> AND last_modified_time = #{lastModifiedTime}</if>
+       	<if test="lastModifiedBy != null"> AND last_modified_by like '%${lastModifiedBy}%' </if>
+        </where>
+    </sql>
+
+    <sql id="oneWhere">
+        <where>
+            <if test="id != null"> AND id = #{id}</if>
+            <if test="taskType != null"> AND task_type = #{taskType}</if>
+            <if test="taskName != null"> AND task_name = #{taskName}</if>
+            <if test="taskPic != null"> AND task_pic = #{taskPic}</if>
+            <if test="rewardType != null"> AND reward_type = #{rewardType}</if>
+            <if test="taskReward != null"> AND task_reward = #{taskReward}</if>
+            <if test="taskCondition != null"> AND task_condition = #{taskCondition}</if>
+            <if test="expire != null"> AND expire = #{expire}</if>
+            <if test="hidden != null"> AND hidden = #{hidden}</if>
+            <if test="memo != null"> AND memo = #{memo}</if>
+            <if test="disabled != null"> AND disabled = #{disabled}</if>
+            <if test="createTime != null"> AND create_time = #{createTime}</if>
+            <if test="createBy != null"> AND create_by = #{createBy}</if>
+            <if test="lastModifiedTime != null"> AND last_modified_time = #{lastModifiedTime}</if>
+            <if test="lastModifiedBy != null"> AND last_modified_by = #{lastModifiedBy}</if>
+        </where>
+    </sql>
+
+    <insert id="create" parameterType="com.wm.bcgame.model.SysTask">
+        INSERT INTO t_sys_task
+        (<include refid="columns"/>)
+        VALUES(
+                #{id,jdbcType=NUMERIC},
+                #{taskType,jdbcType=NUMERIC},
+                #{taskName,jdbcType=VARCHAR},
+                #{taskPic,jdbcType=VARCHAR},
+                #{rewardType,jdbcType=NUMERIC},
+                #{taskReward,jdbcType=VARCHAR},
+                #{taskCondition,jdbcType=VARCHAR},
+                #{expire,jdbcType=TIMESTAMP},
+                #{hidden,jdbcType=NUMERIC},
+                #{memo,jdbcType=VARCHAR},
+                #{disabled,jdbcType=NUMERIC},
+                #{createTime,jdbcType=TIMESTAMP},
+                #{createBy,jdbcType=NUMERIC},
+                #{lastModifiedTime,jdbcType=TIMESTAMP},
+                #{lastModifiedBy,jdbcType=NUMERIC}
+        )
+    </insert>
+
+    <delete id="delete" parameterType="java.lang.Long">
+        DELETE FROM t_sys_task
+        WHERE
+        <include refid="whereId"/>
+    </delete>
+    <update id="update" parameterType="com.wm.bcgame.model.SysTask">
+        UPDATE t_sys_task SET
+                id=#{id,jdbcType=NUMERIC},
+                task_type=#{taskType,jdbcType=NUMERIC},
+                task_name=#{taskName,jdbcType=VARCHAR},
+                task_pic=#{taskPic,jdbcType=VARCHAR},
+                reward_type=#{rewardType,jdbcType=NUMERIC},
+                task_reward=#{taskReward,jdbcType=VARCHAR},
+                task_condition=#{taskCondition,jdbcType=VARCHAR},
+                expire=#{expire,jdbcType=TIMESTAMP},
+                hidden=#{hidden,jdbcType=NUMERIC},
+                memo=#{memo,jdbcType=VARCHAR},
+                disabled=#{disabled,jdbcType=NUMERIC},
+                create_time=#{createTime,jdbcType=TIMESTAMP},
+                create_by=#{createBy,jdbcType=NUMERIC},
+                last_modified_time=#{lastModifiedTime,jdbcType=TIMESTAMP},
+                last_modified_by=#{lastModifiedBy,jdbcType=NUMERIC}
+        WHERE
+        <include refid="whereId"/>
+    </update>
+
+    <select id="get" parameterType="java.lang.Long" resultMap="SysTask">
+        SELECT <include refid="columns"/>
+        FROM t_sys_task
+        WHERE
+        <include refid="whereId"/>
+    </select>
+
+    <select id="query" resultMap="SysTask">
+        SELECT <include refid="columns"/>
+        FROM t_sys_task
+        <include refid="dynamicWhere" />
+    </select>
+    <select id="search" resultMap="SysTask">
+        SELECT <include refid="columns"/>
+        FROM t_sys_task
+        <include refid="dynamicWhere" />
+    </select>
+    <select id="getOne" resultMap="SysTask">
+        SELECT <include refid="columns"/>
+        FROM t_sys_task
+        <include refid="oneWhere" />
+    </select>
+
+    <select id="getList" resultMap="SysTask">
+        SELECT <include refid="columns"/>
+        FROM t_sys_task
+        <include refid="oneWhere" />
+    </select>
+
+    <select id="getAll" resultMap="SysTask">
+        SELECT <include refid="columns"/>
+        FROM t_sys_task
+    </select>
+</mapper>

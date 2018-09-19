@@ -1,4 +1,4 @@
-package com.wm.bcgame.service;
+package com.wm.bcgame.taskService;
 
 import com.google.gson.Gson;
 import com.wm.bcgame.base.BaseConstant;
@@ -116,16 +116,16 @@ public class ScheduledTaskService {
 			String detail = stringRedisTemplate.opsForValue().get(BaseConstant.HUOBI_CURRENCY_DETAIL+value).toString();
 			CoinSingle coinSingle = gson.fromJson(detail,CoinSingle.class);
 			RaiseRank raiseRank = new RaiseRank();
-			raiseRank.setCoinNo(value);
-			raiseRank.setOpen(coinSingle.getOpen());
-			raiseRank.setClose(coinSingle.getClose());
-			raiseRank.setVol(coinSingle.getVol());
-			raiseRank.setAmount(coinSingle.getAmount());
-			raiseRank.setCount(coinSingle.getCount());
-			raiseRank.setRank(count);
-//			收盘价--人民币计价
-			raiseRank.setCloseRmb(coinSingle.getClose());
-			raiseRank.setRate(coinSingle.getClose() - coinSingle.getOpen());
+//			raiseRank.setCoinNo(value);
+//			raiseRank.setOpen(coinSingle.getOpen());
+//			raiseRank.setClose(coinSingle.getClose());
+//			raiseRank.setVol(coinSingle.getVol());
+//			raiseRank.setAmount(coinSingle.getAmount());
+//			raiseRank.setCount(coinSingle.getCount());
+//			raiseRank.setRank(count);
+////			收盘价--人民币计价
+//			raiseRank.setCloseRmb(coinSingle.getClose());
+//			raiseRank.setRate(coinSingle.getClose() - coinSingle.getOpen());
 
 			count ++;
 			if(count == 31){
@@ -136,25 +136,25 @@ public class ScheduledTaskService {
 	}
 
 	//统计日k线图--5min
-//	@Scheduled(fixedRate = 300000)
+	@Scheduled(fixedRate = 300000)
 	public void kLineDay() {
 		getKlines("5min", "288", BaseConstant.HUOBI_CURRENCY_KLINE_DAY);
 	}
 
 	//统计周k线图--30min
-//	@Scheduled(fixedRate = 1800000)
+	@Scheduled(fixedRate = 1800000)
 	public void kLineWeek() {
 		getKlines("30min", "336", BaseConstant.HUOBI_CURRENCY_KLINE_WEEK);
 	}
 
 	//统计月k线图--60min
-//	@Scheduled(fixedRate = 3600000)
+	@Scheduled(fixedRate = 3600000)
 	public void kLineMonth() {
 		getKlines("60min", "744", BaseConstant.HUOBI_CURRENCY_KLINE_MONTH);
 	}
 
 	//统计年k线图--1day
-//	@Scheduled(fixedRate = 86400000)
+	@Scheduled(fixedRate = 86400000)
 	public void kLineYear() {
 		getKlines("1day", "365", BaseConstant.HUOBI_CURRENCY_KLINE_YEAR);
 	}

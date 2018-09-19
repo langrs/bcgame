@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wm.bcgame.dao.SysGameDao">
+    <resultMap id="SysGame" type="com.wm.bcgame.model.SysGame">
+		<id property="id" column="id" jdbcType="NUMERIC" />
+		<result property= "name" column="name" jdbcType="VARCHAR" />
+		<result property= "icon" column="icon" jdbcType="VARCHAR" />
+		<result property= "coinId" column="coin_id" jdbcType="NUMERIC" />
+		<result property= "description" column="description" jdbcType="VARCHAR" />
+		<result property= "introduce" column="introduce" jdbcType="VARCHAR" />
+		<result property= "pos" column="pos" jdbcType="NUMERIC" />
+		<result property= "heat" column="heat" jdbcType="NUMERIC" />
+		<result property= "players" column="players" jdbcType="NUMERIC" />
+		<result property= "trend" column="trend" jdbcType="NUMERIC" />
+		<result property= "memo" column="memo" jdbcType="VARCHAR" />
+		<result property= "disabled" column="disabled" jdbcType="NUMERIC" />
+		<result property= "createTime" column="create_time" jdbcType="TIMESTAMP" />
+		<result property= "createBy" column="create_by" jdbcType="NUMERIC" />
+		<result property= "lastModifiedTime" column="last_modified_time" jdbcType="TIMESTAMP" />
+		<result property= "lastModifiedBy" column="last_modified_by" jdbcType="NUMERIC" />
+    </resultMap>
+
+    <sql id="whereId">
+        id=#{id}
+    </sql>
+
+    <sql id="columns">
+            id,
+            name,
+            icon,
+            coin_id,
+            description,
+            introduce,
+            pos,
+            heat,
+            players,
+            trend,
+            memo,
+            disabled,
+            create_time,
+            create_by,
+            last_modified_time,
+            last_modified_by
+    </sql>
+
+    <sql id="dynamicWhere">
+        <where>
+       	<if test="id != null"> AND id like '%${id}%' </if>
+       	<if test="name != null"> AND name like '%${name}%' </if>
+       	<if test="icon != null"> AND icon like '%${icon}%' </if>
+       	<if test="coinId != null"> AND coin_id like '%${coinId}%' </if>
+       	<if test="description != null"> AND description like '%${description}%' </if>
+       	<if test="introduce != null"> AND introduce like '%${introduce}%' </if>
+       	<if test="pos != null"> AND pos like '%${pos}%' </if>
+       	<if test="heat != null"> AND heat like '%${heat}%' </if>
+       	<if test="players != null"> AND players like '%${players}%' </if>
+       	<if test="trend != null"> AND trend like '%${trend}%' </if>
+       	<if test="memo != null"> AND memo like '%${memo}%' </if>
+       	<if test="disabled != null"> AND disabled like '%${disabled}%' </if>
+       	<if test="createTime != null"> AND create_time = #{createTime}</if>
+       	<if test="createBy != null"> AND create_by like '%${createBy}%' </if>
+       	<if test="lastModifiedTime != null"> AND last_modified_time = #{lastModifiedTime}</if>
+       	<if test="lastModifiedBy != null"> AND last_modified_by like '%${lastModifiedBy}%' </if>
+        </where>
+    </sql>
+
+    <sql id="oneWhere">
+        <where>
+            <if test="id != null"> AND id = #{id}</if>
+            <if test="name != null"> AND name = #{name}</if>
+            <if test="icon != null"> AND icon = #{icon}</if>
+            <if test="coinId != null"> AND coin_id = #{coinId}</if>
+            <if test="description != null"> AND description = #{description}</if>
+            <if test="introduce != null"> AND introduce = #{introduce}</if>
+            <if test="pos != null"> AND pos = #{pos}</if>
+            <if test="heat != null"> AND heat = #{heat}</if>
+            <if test="players != null"> AND players = #{players}</if>
+            <if test="trend != null"> AND trend = #{trend}</if>
+            <if test="memo != null"> AND memo = #{memo}</if>
+            <if test="disabled != null"> AND disabled = #{disabled}</if>
+            <if test="createTime != null"> AND create_time = #{createTime}</if>
+            <if test="createBy != null"> AND create_by = #{createBy}</if>
+            <if test="lastModifiedTime != null"> AND last_modified_time = #{lastModifiedTime}</if>
+            <if test="lastModifiedBy != null"> AND last_modified_by = #{lastModifiedBy}</if>
+        </where>
+    </sql>
+    <sql id="limitPage">
+        LIMIT #{pageStart},#{pageSize}
+    </sql>
+
+
+    <insert id="create" parameterType="com.wm.bcgame.model.SysGame">
+        INSERT INTO t_sys_game
+        (<include refid="columns"/>)
+        VALUES(
+                #{id,jdbcType=NUMERIC},
+                #{name,jdbcType=VARCHAR},
+                #{icon,jdbcType=VARCHAR},
+                #{coinId,jdbcType=NUMERIC},
+                #{description,jdbcType=VARCHAR},
+                #{introduce,jdbcType=VARCHAR},
+                #{pos,jdbcType=NUMERIC},
+                #{heat,jdbcType=NUMERIC},
+                #{players,jdbcType=NUMERIC},
+                #{trend,jdbcType=NUMERIC},
+                #{memo,jdbcType=VARCHAR},
+                #{disabled,jdbcType=NUMERIC},
+                #{createTime,jdbcType=TIMESTAMP},
+                #{createBy,jdbcType=NUMERIC},
+                #{lastModifiedTime,jdbcType=TIMESTAMP},
+                #{lastModifiedBy,jdbcType=NUMERIC}
+        )
+    </insert>
+
+    <delete id="delete" parameterType="java.lang.Long">
+        DELETE FROM t_sys_game
+        WHERE
+        <include refid="whereId"/>
+    </delete>
+    <update id="update" parameterType="com.wm.bcgame.model.SysGame">
+        UPDATE t_sys_game SET
+                id=#{id,jdbcType=NUMERIC},
+                name=#{name,jdbcType=VARCHAR},
+                icon=#{icon,jdbcType=VARCHAR},
+                coin_id=#{coinId,jdbcType=NUMERIC},
+                description=#{description,jdbcType=VARCHAR},
+                introduce=#{introduce,jdbcType=VARCHAR},
+                pos=#{pos,jdbcType=NUMERIC},
+                heat=#{heat,jdbcType=NUMERIC},
+                players=#{players,jdbcType=NUMERIC},
+                trend=#{trend,jdbcType=NUMERIC},
+                memo=#{memo,jdbcType=VARCHAR},
+                disabled=#{disabled,jdbcType=NUMERIC},
+                create_time=#{createTime,jdbcType=TIMESTAMP},
+                create_by=#{createBy,jdbcType=NUMERIC},
+                last_modified_time=#{lastModifiedTime,jdbcType=TIMESTAMP},
+                last_modified_by=#{lastModifiedBy,jdbcType=NUMERIC}
+        WHERE
+        <include refid="whereId"/>
+    </update>
+
+    <select id="get" parameterType="java.lang.Long" resultMap="SysGame">
+        SELECT <include refid="columns"/>
+        FROM t_sys_game
+        WHERE
+        <include refid="whereId"/>
+    </select>
+
+    <select id="query" resultMap="SysGame">
+        SELECT <include refid="columns"/>
+        FROM t_sys_game
+        <include refid="dynamicWhere" />
+    </select>
+    <select id="search" resultMap="SysGame">
+        SELECT <include refid="columns"/>
+        FROM t_sys_game
+        <include refid="dynamicWhere" />
+    </select>
+    <select id="getOne" resultMap="SysGame">
+        SELECT <include refid="columns"/>
+        FROM t_sys_game
+        <include refid="oneWhere" />
+    </select>
+
+    <select id="getList" resultMap="SysGame">
+        SELECT <include refid="columns"/>
+        FROM t_sys_game
+        <include refid="oneWhere" />
+    </select>
+
+    <select id="getAll" resultMap="SysGame">
+        SELECT <include refid="columns"/>
+        FROM t_sys_game
+    </select>
+    <!--获取总页数-->
+    <select id="getPageCount" resultType="java.lang.Long">
+        SELECT count(*)
+        FROM t_sys_game
+        <include refid="oneWhere"/>
+    </select>
+<!--获取分页数据-->
+    <select id="getListPage" resultMap="SysGame">
+        SELECT <include refid="columns"/>
+        FROM t_sys_game
+        <include refid="oneWhere" />
+        ORDER BY heat DESC
+        <include refid="limitPage"/>
+    </select>
+</mapper>

@@ -9,12 +9,13 @@ import java.io.Serializable;
  * @description
  * @date 11:56 2018/9/11
  * @mondified
+ *
  **/
 public class ResponseDto<T> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	//	状态:ok error
-	@ApiModelProperty(value = "返回状态:ok失败 error成功")
+	@ApiModelProperty(value = "返回状态:200成功")
 	private String status;
 	//	错误代码
 	@ApiModelProperty(value = "错误代码")
