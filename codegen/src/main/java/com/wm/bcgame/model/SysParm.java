@@ -23,32 +23,32 @@ public class SysParm extends AbstractModel {
     //
     private String description;
 ///////////////////////////////////////////////////////////////
-    public Long getid() {
+    public Long getId() {
         return this.id;
     }
 
-    public void setid(Long id) {
+    public void setId(Long id) {
         this.id = id;
     }
-    public Long getparmCode() {
+    public Long getParmCode() {
         return this.parmCode;
     }
 
-    public void setparmCode(Long parmCode) {
+    public void setParmCode(Long parmCode) {
         this.parmCode = parmCode;
     }
-    public String getparmValues() {
+    public String getParmValues() {
         return this.parmValues;
     }
 
-    public void setparmValues(String parmValues) {
+    public void setParmValues(String parmValues) {
         this.parmValues = parmValues;
     }
-    public String getdescription() {
+    public String getDescription() {
         return this.description;
     }
 
-    public void setdescription(String description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 

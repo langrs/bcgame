@@ -1,4 +1,4 @@
-package com.wm.bcgame.taskService;
+package com.wm.bcgame.comm;
 
 /**
  * @author LZM
@@ -8,13 +8,13 @@ package com.wm.bcgame.taskService;
  **/
 public class BusinessException extends Exception {
 	private static final long serialVersionUID = 1L;
-	private  String errMsg;
+	private Error error;
 
-	public String getErrMsg() {
-		return errMsg;
+	public Error getError() {
+		return error;
 	}
 
-	public void setErrMsg(String errMsg) {
-		this.errMsg = errMsg;
+	public void setError(Error error) {
+		this.error = error;
 	}
 }

@@ -20,32 +20,32 @@ public class UserInvite extends AbstractModel {
     //备注
     private String memo;
 ///////////////////////////////////////////////////////////////
-    public Long getid() {
+    public Long getId() {
         return this.id;
     }
 
-    public void setid(Long id) {
+    public void setId(Long id) {
         this.id = id;
     }
-    public Long getuserId() {
+    public Long getUserId() {
         return this.userId;
     }
 
-    public void setuserId(Long userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
-    public Long getinvitedUserId() {
+    public Long getInvitedUserId() {
         return this.invitedUserId;
     }
 
-    public void setinvitedUserId(Long invitedUserId) {
+    public void setInvitedUserId(Long invitedUserId) {
         this.invitedUserId = invitedUserId;
     }
-    public String getmemo() {
+    public String getMemo() {
         return this.memo;
     }
 
-    public void setmemo(String memo) {
+    public void setMemo(String memo) {
         this.memo = memo;
     }
 

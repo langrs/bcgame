@@ -3,7 +3,9 @@
 <mapper namespace="com.wm.bcgame.dao.SysNoticeDao">
     <resultMap id="SysNotice" type="com.wm.bcgame.model.SysNotice">
 		<id property="id" column="id" jdbcType="NUMERIC" />
+		<result property= "noticeType" column="notice_type" jdbcType="NUMERIC" />
 		<result property= "title" column="title" jdbcType="VARCHAR" />
+		<result property= "noticeTime" column="notice_time" jdbcType="VARCHAR" />
 		<result property= "description" column="description" jdbcType="VARCHAR" />
 		<result property= "expiry" column="expiry" jdbcType="TIMESTAMP" />
 		<result property= "disabled" column="disabled" jdbcType="NUMERIC" />
@@ -19,7 +21,9 @@
 
     <sql id="columns">
             id,
+            notice_type,
             title,
+            notice_time,
             description,
             expiry,
             disabled,
@@ -32,28 +36,32 @@
     <sql id="dynamicWhere">
         <where>
        	<if test="id != null"> AND id like '%${id}%' </if>
+       	<if test="noticeType != null"> AND notice_type like '%${noticeType}%' </if>
        	<if test="title != null"> AND title like '%${title}%' </if>
+       	<if test="noticeTime != null"> AND notice_time like '%${noticeTime}%' </if>
        	<if test="description != null"> AND description like '%${description}%' </if>
-       	<if test="expiry != null"> AND expiry = #{expiry}</if>
+       	<if test="expiryStart != null"> AND  expiry <![CDATA[ >= ]]> #{expiryStart} AND expiry <![CDATA[ < ]]> #{expiryEnd}</if>
        	<if test="disabled != null"> AND disabled like '%${disabled}%' </if>
-       	<if test="createTime != null"> AND create_time = #{createTime}</if>
+       	<if test="createTimeStart != null"> AND  create_time <![CDATA[ >= ]]> #{createTimeStart} AND create_time <![CDATA[ < ]]> #{createTimeEnd}</if>
        	<if test="createBy != null"> AND create_by like '%${createBy}%' </if>
-       	<if test="lastModifiedTime != null"> AND last_modified_time = #{lastModifiedTime}</if>
+       	<if test="lastModifiedTimeStart != null"> AND  last_modified_time <![CDATA[ >= ]]> #{lastModifiedTimeStart} AND last_modified_time <![CDATA[ < ]]> #{lastModifiedTimeEnd}</if>
        	<if test="lastModifiedBy != null"> AND last_modified_by like '%${lastModifiedBy}%' </if>
         </where>
     </sql>
 
     <sql id="oneWhere">
         <where>
-            <if test="id != null"> AND id = #{id}</if>
-            <if test="title != null"> AND title = #{title}</if>
-            <if test="description != null"> AND description = #{description}</if>
-            <if test="expiry != null"> AND expiry = #{expiry}</if>
-            <if test="disabled != null"> AND disabled = #{disabled}</if>
-            <if test="createTime != null"> AND create_time = #{createTime}</if>
-            <if test="createBy != null"> AND create_by = #{createBy}</if>
-            <if test="lastModifiedTime != null"> AND last_modified_time = #{lastModifiedTime}</if>
-            <if test="lastModifiedBy != null"> AND last_modified_by = #{lastModifiedBy}</if>
+       	<if test="id != null"> AND id = #{id}</if>
+       	<if test="noticeType != null"> AND notice_type = #{noticeType}</if>
+       	<if test="title != null"> AND title = #{title}</if>
+       	<if test="noticeTime != null"> AND notice_time = #{noticeTime}</if>
+       	<if test="description != null"> AND description = #{description}</if>
+       	<if test="expiryStart != null"> AND expiry <![CDATA[ >= ]]> #{expiryStart} AND expiry <![CDATA[ < ]]> #{expiryEnd}</if>
+       	<if test="disabled != null"> AND disabled = #{disabled}</if>
+       	<if test="createTimeStart != null"> AND create_time <![CDATA[ >= ]]> #{createTimeStart} AND create_time <![CDATA[ < ]]> #{createTimeEnd}</if>
+       	<if test="createBy != null"> AND create_by = #{createBy}</if>
+       	<if test="lastModifiedTimeStart != null"> AND last_modified_time <![CDATA[ >= ]]> #{lastModifiedTimeStart} AND last_modified_time <![CDATA[ < ]]> #{lastModifiedTimeEnd}</if>
+       	<if test="lastModifiedBy != null"> AND last_modified_by = #{lastModifiedBy}</if>
         </where>
     </sql>
 
@@ -62,7 +70,9 @@
         (<include refid="columns"/>)
         VALUES(
                 #{id,jdbcType=NUMERIC},
+                #{noticeType,jdbcType=NUMERIC},
                 #{title,jdbcType=VARCHAR},
+                #{noticeTime,jdbcType=VARCHAR},
                 #{description,jdbcType=VARCHAR},
                 #{expiry,jdbcType=TIMESTAMP},
                 #{disabled,jdbcType=NUMERIC},
@@ -81,7 +91,9 @@
     <update id="update" parameterType="com.wm.bcgame.model.SysNotice">
         UPDATE t_sys_notice SET
                 id=#{id,jdbcType=NUMERIC},
+                notice_type=#{noticeType,jdbcType=NUMERIC},
                 title=#{title,jdbcType=VARCHAR},
+                notice_time=#{noticeTime,jdbcType=VARCHAR},
                 description=#{description,jdbcType=VARCHAR},
                 expiry=#{expiry,jdbcType=TIMESTAMP},
                 disabled=#{disabled,jdbcType=NUMERIC},

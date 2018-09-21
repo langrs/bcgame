@@ -98,20 +98,6 @@ public class App {
                 //生成服务实现层文件
                 generateServiceImplFile(dataMap);
             }
-//            //生成Mapper文件
-//            generateMapperFile(resultSet);
-
-//            //生成Repository文件
-//            generateRepositoryFile(resultSet);
-//            //生成服务层接口文件
-//            generateServiceInterfaceFile(resultSet);
-//            //生成服务实现层文件
-//            generateServiceImplFile(resultSet);
-//            //生成Controller层文件
-//            generateControllerFile(resultSet);
-            //生成DTO文件
-//            generateDTOFile(resultSet);
-//            //生成Model文件
 
         } catch (Exception e) {
             throw new RuntimeException(e);

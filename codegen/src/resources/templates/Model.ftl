@@ -18,7 +18,7 @@ public class ${table_name} extends AbstractModel {
     <#list model_column as model>
         <#if model.ignore = false >
     //${model.columnComment!}
-            <#if (model.columnType = 'varchar' || model.columnType = 'text')>
+            <#if (model.columnType = 'varchar' || model.columnType = 'char'|| model.columnType = 'text')>
                 <#assign datetype='String' />
             <#elseif (model.columnType = 'timestamp' || model.columnType = 'datetime')>
                 <#assign datetype='Date' />
@@ -35,7 +35,7 @@ public class ${table_name} extends AbstractModel {
 <#if model_column?exists>
     <#list model_column as model>
         <#if model.ignore = false >
-            <#if (model.columnType = 'varchar' || model.columnType = 'text')>
+            <#if (model.columnType = 'varchar' || model.columnType = 'char' || model.columnType = 'text')>
                 <#assign datetype='String' />
             <#elseif (model.columnType = 'timestamp' || model.columnType = 'datetime')>
                 <#assign datetype='Date' />
@@ -44,11 +44,11 @@ public class ${table_name} extends AbstractModel {
             <#elseif (model.columnType = 'int' || model.columnType = 'smallint')>
                 <#assign datetype='Long'/>
             </#if>
-    public ${datetype} get${model.changeColumnName}() {
+    public ${datetype} get${model.changeColumnName?cap_first}() {
         return this.${model.changeColumnName?uncap_first};
     }
 
-    public void set${model.changeColumnName}(${datetype} ${model.changeColumnName?uncap_first}) {
+    public void set${model.changeColumnName?cap_first}(${datetype} ${model.changeColumnName?uncap_first}) {
         this.${model.changeColumnName?uncap_first} = ${model.changeColumnName?uncap_first};
     }
         </#if>

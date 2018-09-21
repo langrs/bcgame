@@ -16,29 +16,29 @@ import static junit.framework.TestCase.assertFalse;
  * @date 10:10 2018/9/19
  * @mondified
  **/
-@RunWith(SpringRunner.class)
-@SpringBootTest
+//@RunWith(SpringRunner.class)
+//@SpringBootTest
 public class MailServiceTest {
-	@Resource
-	MailService mailService;
-	@Before
-	public void init(){
+//	@Resource
+//	MailService mailService;
+//	@Before
+//	public void init(){
+//
+//	}
+//	@Test
+//	public void sendMail(){
+//		String deliver = "54294536@qq.com";
+//		String[] receiver = {"27617839@qq.com"};
+//		String[] carbonCopy = null;
+//		String subject = "链游注册用户验证码";
+//		String content = "链游验证码:";
+//
+//		try {
+//			mailService.sendSimpleEmail(deliver, receiver, carbonCopy, subject, content);
+//		} catch (Exception e) {
+//			assertFalse("Send simple email failed", true);
+//			e.printStackTrace();
+//		}
 
-	}
-	@Test
-	public void sendMail(){
-		String deliver = "54294536@qq.com";
-		String[] receiver = {"27617839@qq.com"};
-		String[] carbonCopy = null;
-		String subject = "链游注册用户验证码";
-		String content = "链游验证码:";
-
-		try {
-			mailService.sendSimpleEmail(deliver, receiver, carbonCopy, subject, content);
-		} catch (Exception e) {
-			assertFalse("Send simple email failed", true);
-			e.printStackTrace();
-		}
-
-	}
+//	}
 }

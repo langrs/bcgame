@@ -23,8 +23,8 @@ import java.util.Set;
  * @date 14:42 2018/9/10
  * @mondified
  **/
-@RunWith(SpringRunner.class)
-@SpringBootTest
+//@RunWith(SpringRunner.class)
+//@SpringBootTest
 public class ApiClientTest {
 	private final Logger logger = LoggerFactory.getLogger(ApiClientTest.class);
     @Value("${huobi.key}")
@@ -44,7 +44,7 @@ public class ApiClientTest {
 
 	}
 
-	@Test
+//	@Test
 	public void testZset(){
 		String key = "lzmZset";
 		String str = stringRedisTemplate.opsForValue().get("HuobiCurrencyKLineYearthetausdt").toString();
@@ -65,7 +65,7 @@ public class ApiClientTest {
 		System.out.println("====="+str);
 	}
 //    测试获取所有的币种
-    @Test
+//    @Test
     public void currencys(){
     	String symbol ="ethusdt";
 		CurrencysResponse currencys  = apiClient.currencys(symbol);

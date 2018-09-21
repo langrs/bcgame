@@ -4,11 +4,14 @@ import com.fasterxml.jackson.databind.ser.Serializers;
 import com.google.gson.Gson;
 import com.wm.bcgame.base.BaseConstant;
 import com.wm.bcgame.base.QueryMap;
+import com.wm.bcgame.comm.BusinessException;
+import com.wm.bcgame.comm.Error;
 import com.wm.bcgame.dto.CoinSingle;
 import com.wm.bcgame.dto.DataDto;
 import com.wm.bcgame.dto.ResponseDto;
 import com.wm.bcgame.dto.favorite.FavoriteDto;
 import com.wm.bcgame.dto.login.GameDto;
+import com.wm.bcgame.dto.user.CheckPicDto;
 import com.wm.bcgame.model.SysCoin;
 import com.wm.bcgame.model.SysGame;
 import com.wm.bcgame.model.UserFavorite;
@@ -27,7 +30,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.xml.crypto.Data;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -62,8 +67,7 @@ public class UserController {
 			@ApiImplicitParam(name = "favoriteType", value = "收藏类型:0游戏,1币种", paramType = "query", required = true, dataType = "Integer")
 	})
 	@RequestMapping(value = "/getUserFavorite", method = RequestMethod.POST)
-	public ResponseDto<List<FavoriteDto>> getUserFavorite(@ApiParam Long userId, @ApiParam int favoriteType){
-		ResponseDto<List<FavoriteDto>> responseDto = new ResponseDto();
+	public List<FavoriteDto> getUserFavorite(@ApiParam Long userId, @ApiParam int favoriteType)throws BusinessException{
 		Gson gson = new Gson();
 		QueryMap queryMap = new QueryMap();
 		queryMap.put("disabled",0);
@@ -76,19 +80,23 @@ public class UserController {
 //		转换dto返回值
 		for(UserFavorite userFavorite:userFavorites){
 			FavoriteDto favoriteDto = new FavoriteDto();
-			Long id = userFavorite.getfavoriteId();
+			Long id = userFavorite.getFavoriteId();
 			if(favoriteType == 0){ //游戏
 				SysGame sysGame = sysGameService.get(id);
+
 				favoriteDto.setId(id);
-				favoriteDto.setGameName(sysGame.getname());
-				favoriteDto.setIcon(sysGame.geticon());
-				favoriteDto.setPlayers(sysGame.getplayers());
+				favoriteDto.setGameName(sysGame.getName());
+				SysCoin sysCoin = sysCoinService.get(sysGame.getCoinId());
+				favoriteDto.setCoinNo(sysCoin.getCoinNo());
+				favoriteDto.setCoinName(sysCoin.getName());
+				favoriteDto.setIcon(sysGame.getIcon());
+				favoriteDto.setPlayers(sysGame.getPlayers());
 			}else{ //币种
 				SysCoin sysCoin = sysCoinService.get(id);
 				favoriteDto.setId(id);
-				favoriteDto.setCoinName(sysCoin.getname());
-				favoriteDto.setCoinNo(sysCoin.getcoinNo());
-				String symbol = sysCoin.getcoinNo().trim() + "usdt";
+				favoriteDto.setCoinName(sysCoin.getName());
+				favoriteDto.setCoinNo(sysCoin.getCoinNo());
+				String symbol = sysCoin.getCoinNo().trim() + "usdt";
 //				从redis中获取最新的币种信息
 				String detail = stringRedisTemplate.opsForValue().get(BaseConstant.HUOBI_CURRENCY_DETAIL+symbol);
 				CoinSingle coinSingle = gson.fromJson(detail,CoinSingle.class);
@@ -101,9 +109,7 @@ public class UserController {
 			}
 			favoriteDtos.add(favoriteDto);
 		}
-		responseDto.setStatus("ok");
-		responseDto.setData(favoriteDtos);
-		return responseDto;
+		return favoriteDtos;
 	}
 	@ApiOperation(value = "用户更新收藏信息", notes = "用户更新收藏信息：加入收藏夹或取消收藏")
 	@ApiImplicitParams({
@@ -113,7 +119,7 @@ public class UserController {
 			@ApiImplicitParam(name = "favoriteId", value = "收藏内容ID", paramType = "query", required = true, dataType = "Long")
 	})
 	@RequestMapping(value = "/updateUserFavorite", method = RequestMethod.POST)
-	public void updateUserFavorite(@ApiParam Long userId,@ApiParam Long favoriteOp,@ApiParam Long favoriteType,@ApiParam Long favoriteId ){
+	public void updateUserFavorite(@ApiParam Long userId,@ApiParam Long favoriteOp,@ApiParam Long favoriteType,@ApiParam Long favoriteId ) throws BusinessException{
 		QueryMap queryMap = new QueryMap();
 		queryMap.put("userId",userId);
 		queryMap.put("favoriteType",favoriteType);
@@ -125,9 +131,9 @@ public class UserController {
 			userFavoriteService.update(userFavorite);
 		}else{
 			userFavorite = new UserFavorite();
-			userFavorite.setfavoriteId(favoriteId);
-			userFavorite.setfavoriteType(favoriteType);
-			userFavorite.setuserId(userId);
+			userFavorite.setFavoriteId(favoriteId);
+			userFavorite.setFavoriteType(favoriteType);
+			userFavorite.setUserId(userId);
 			userFavorite.setDisabled(favoriteOp);
 			userFavoriteService.create(userFavorite);
 		}
@@ -137,11 +143,9 @@ public class UserController {
 	@ApiOperation(value = "获取用户历史玩过的游戏", notes = "获取用户历史玩过的游戏")
 	@ApiImplicitParam(name = "userId", value = "用户ID", paramType = "query", required = true, dataType = "Long")
 	@RequestMapping(value = "/getHistoryGame", method = RequestMethod.POST)
-	public ResponseDto<DataDto<List<GameDto>>> getHistoryGame(@ApiParam Long userId ){
+	public List<GameDto> getHistoryGame(@ApiParam Long userId ) throws BusinessException{
 //		获取汇率
 		double exchangeRate =  coinService.getExchangeRate("");
-		ResponseDto<DataDto<List<GameDto>>> responseDto = new ResponseDto<>();
-		DataDto dataDto = new DataDto();
 		List<GameDto> gameDtos = new ArrayList<>();
 		QueryMap queryMap = new QueryMap();
 		queryMap.put("disabled",0);
@@ -149,49 +153,51 @@ public class UserController {
 		queryMap.put("historyType",0); //0获取历史游戏
 		List<UserHistory> userHistorys = userHistoryService.getList(queryMap);
 		for(UserHistory userHistory:userHistorys){
-			Long gameId = userHistory.gethistoryId();
+			Long gameId = userHistory.getHistoryId();
 			SysGame sysGame = sysGameService.get(gameId);
 //			获取币种名称
-			Long coinId = sysGame.getcoinId();
+			Long coinId = sysGame.getCoinId();
 			SysCoin sysCoin = sysCoinService.get(coinId);
 //获取币种成交量
-			CoinSingle coinSingle = coinService.getCoinSingle(sysCoin.getcoinNo());
+			CoinSingle coinSingle = coinService.getCoinSingle(sysCoin.getCoinNo());
 			GameDto gameDto = new GameDto();
-			gameDto.setGameName(sysGame.getname());
+			gameDto.setGameName(sysGame.getName());
 //			币种名称
-			gameDto.setCoinName(sysCoin.getcoinNo());
-			gameDto.setPlayers(sysGame.getplayers());
-			gameDto.setIcon(sysGame.geticon());
+			gameDto.setCoinName(sysCoin.getCoinNo());
+			gameDto.setPlayers(sysGame.getPlayers());
+			gameDto.setIcon(sysGame.getIcon());
 //			24H成交量RMB
 			gameDto.setVolRmb(coinSingle.getVol()*exchangeRate);
 			gameDtos.add(gameDto);
 		}
-		dataDto.setDataList(gameDtos);
-		responseDto.setStatus(BaseConstant.STATUS_OK);
-		responseDto.setData(dataDto);
-		return responseDto;
+		return gameDtos;
 	}
 
 	@ApiOperation(value = "获取验证图片", notes = "返回验证图片的url地址")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "sendType", value = "类型:0发送手机验证码 1发邮箱验证码", paramType = "query", required = true, dataType = "Long"),
+			@ApiImplicitParam(name = "sendNo", value = "手机号/邮箱地址", paramType = "query", required = true, dataType = "String")
+	})
 	@RequestMapping(value = "/getCheckPic", method = RequestMethod.POST)
-	public ResponseDto<String> getCheckPic(){
-		ResponseDto<String> responseDto = new ResponseDto<>();
+	public CheckPicDto getCheckPic(@ApiParam Long sendType,@ApiParam String sendNo) throws BusinessException{
+		CheckPicDto checkPicDto =  new CheckPicDto();
 		String url= "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1537268483864&di=be1add8f527d400eda320243273d1cd4&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimage%2Fc0%253Dpixel_huitu%252C0%252C0%252C294%252C40%2Fsign%3De3bf833fa4c3793169658e6982bcd229%2F9f2f070828381f30726bcc90a2014c086e06f09d.jpg";
-		responseDto.setData(url);
-		responseDto.setStatus(BaseConstant.STATUS_OK);
-		return responseDto;
+		checkPicDto.setUrl(url);
+		String validCode = loginService.getValidCode(sendType,sendNo);
+		checkPicDto.setValidCode(validCode);
+		return checkPicDto;
 	}
 
 	@ApiOperation(value = "发送验证码", notes = "发送手机/邮箱验证码")
 	@ApiImplicitParams({
 			@ApiImplicitParam(name = "sendType", value = "类型:0发送手机验证码 1发邮箱验证码", paramType = "query", required = true, dataType = "Long"),
-			@ApiImplicitParam(name = "sendNo", value = "手机号/邮箱地址", paramType = "query", required = true, dataType = "String")
+			@ApiImplicitParam(name = "sendNo", value = "手机号/邮箱地址", paramType = "query", required = true, dataType = "String"),
+			@ApiImplicitParam(name = "validCode", value = "身份码", paramType = "query", required = true, dataType = "String")
 	})
 	@RequestMapping(value = "/sendAuthCode", method = RequestMethod.POST)
-	public ResponseDto<String> sendAuthCode(@ApiParam Long sendType,@ApiParam String sendNo){
+	public void sendAuthCode(@ApiParam Long sendType,@ApiParam String sendNo,@ApiParam String validCode) throws BusinessException{
 		boolean flag = false;
-		ResponseDto<String> responseDto = new ResponseDto<>();
-		String authCode =  loginService.getAuthCode(sendType,sendNo);
+		String authCode =  loginService.getAuthCode(sendType,sendNo,validCode);
 		//发送短信或者邮件
 		if(sendType == 0){
 			flag = true;
@@ -203,14 +209,11 @@ public class UserController {
 			String content = BaseConstant.EMAIL_AUTH_CODE + authCode;
 			flag = mailService.sendSimpleEmail(deliver, receiver, carbonCopy, subject, content);
 		}
-		if(flag){
-			responseDto.setStatus(BaseConstant.STATUS_OK);
-			responseDto.setErrMsg(authCode);
-		}else{
-			responseDto.setStatus(BaseConstant.STATUS_ERROR);
-			responseDto.setErrMsg("发送验证码失败");
+		if(!flag){
+			BusinessException businessException = new BusinessException();
+			businessException.setError(Error.OPERATION_ERROR);
+			throw businessException;
 		}
-		return responseDto;
 	}
 	@ApiOperation(value = "校验验证码", notes = "校验手机验证码/邮箱验证码的正确性")
 	@ApiImplicitParams({
@@ -219,33 +222,27 @@ public class UserController {
 			@ApiImplicitParam(name = "authCode", value = "用户接收到的验证码", paramType = "query", required = true, dataType = "String")
 	})
 	@RequestMapping(value = "/checkAuthCode", method = RequestMethod.POST)
-	public ResponseDto<String> checkAuthCode(@ApiParam Long sendType,@ApiParam String sendNo,@ApiParam String authCode){
-		ResponseDto<String> responseDto = new ResponseDto<>();
+	public void checkAuthCode(@ApiParam Long sendType, @ApiParam String sendNo, @ApiParam String authCode) throws BusinessException{
+
 		boolean flag = loginService.checkAuthCode(sendNo,authCode);
-		if (flag){
-			responseDto.setStatus(BaseConstant.STATUS_OK);
-		}else {
-			responseDto.setStatus(BaseConstant.STATUS_ERROR);
-			responseDto.setErrCode("校验失败");
+		if (!flag) {
+			BusinessException businessException = new BusinessException();
+			businessException.setError(Error.OPERATION_ERROR);
+			throw businessException;
 		}
-		return responseDto;
 	}
 
 //	public ResponseDto
 	@ApiOperation(value = "是否用户已经设置积分密码", notes = "是否用户已经设置积分密码")
 	@ApiImplicitParam(name = "userId", value = "用户ID", paramType = "query", required = true, dataType = "Long")
 	@RequestMapping(value = "/haveIntegralPasswd", method = RequestMethod.POST)
-	public ResponseDto<String> haveIntegralPasswd(@ApiParam Long userId){
-		ResponseDto<String> responseDto = new ResponseDto<>();
+	public void haveIntegralPasswd(@ApiParam Long userId) throws BusinessException{
 		boolean flag = loginService.haveIntegralPasswd(userId);
-		if(false){
-//			还没设置积分密码
-			responseDto.setData("0");
-		}else{
-			responseDto.setData("1");
+		if(!false){
+			BusinessException businessException = new BusinessException();
+			businessException.setError(Error.OPERATION_ERROR);
+			throw businessException;
 		}
-		responseDto.setStatus(BaseConstant.STATUS_OK);
-		return responseDto;
 	}
 	@ApiOperation(value = "更新密码", notes = "更新积分密码/用户密码")
 	@ApiImplicitParams({
@@ -254,18 +251,8 @@ public class UserController {
 			@ApiImplicitParam(name = "passwd", value = "密码-MD5", paramType = "query", required = true, dataType = "String")
 	})
 	@RequestMapping(value = "/setUserPasswd", method = RequestMethod.POST)
-	public ResponseDto<String> setUserPasswd(@ApiParam Long type,@ApiParam Long userId,@ApiParam String passwd){
-		ResponseDto<String> responseDto = new ResponseDto<>();
-		try{
+	public void setUserPasswd(@ApiParam Long type,@ApiParam Long userId,@ApiParam String passwd) throws BusinessException{
 			loginService.setPasswd(type,userId,passwd);
-			responseDto.setStatus(BaseConstant.STATUS_OK);
-			responseDto.setData("0");
-		}catch(Exception e){
-			responseDto.setStatus(BaseConstant.STATUS_ERROR);
-			responseDto.setErrMsg("密码更新失败");
-			responseDto.setData("1");
-		}
-		return responseDto;
 	}
 
 	@ApiOperation(value = "用户绑定邮箱", notes = "用户绑定邮箱")
@@ -274,17 +261,8 @@ public class UserController {
 			@ApiImplicitParam(name = "email", value = "邮箱地址", paramType = "query", required = true, dataType = "String")
 	})
 	@RequestMapping(value = "/setUserEmail", method = RequestMethod.POST)
-	public ResponseDto<String> setUserEmail(@ApiParam Long userId,@ApiParam String email){
-		ResponseDto<String> responseDto = new ResponseDto<>();
-		boolean flag = loginService.setUserEmail(userId,email);
-		if (flag){
-			responseDto.setStatus(BaseConstant.STATUS_OK);
-			responseDto.setData("0");
-		}else {
-			responseDto.setStatus(BaseConstant.STATUS_ERROR);
-			responseDto.setErrMsg("更新出错");
-		}
-		return responseDto;
+	public void setUserEmail(@ApiParam Long userId,@ApiParam String email) throws BusinessException{
+		loginService.setUserEmail(userId,email);
 	}
 
 }

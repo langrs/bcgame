@@ -1,8 +1,5 @@
 package com.wm.bcgame.model;
-
 import com.wm.bcgame.base.AbstractModel;
-
-import java.util.Date;
 
 
 /**
@@ -21,79 +18,79 @@ public class UserTask extends AbstractModel {
     //
     private Long taskId;
     //任务日期
-    private Date taskDate;
+    private String taskDate;
     //任务状态
     private Long taskStatus;
     //奖励类型
     private Long rewardType;
     //奖励
-    private Double reward;
+    private Double taskReward;
     //任务条件
     private String taskCondition;
     //
     private String memo;
 ///////////////////////////////////////////////////////////////
-    public Long getid() {
+    public Long getId() {
         return this.id;
     }
 
-    public void setid(Long id) {
+    public void setId(Long id) {
         this.id = id;
     }
-    public Long getuserId() {
+    public Long getUserId() {
         return this.userId;
     }
 
-    public void setuserId(Long userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
-    public Long gettaskId() {
+    public Long getTaskId() {
         return this.taskId;
     }
 
-    public void settaskId(Long taskId) {
+    public void setTaskId(Long taskId) {
         this.taskId = taskId;
     }
-    public Date gettaskDate() {
+    public String getTaskDate() {
         return this.taskDate;
     }
 
-    public void settaskDate(Date taskDate) {
+    public void setTaskDate(String taskDate) {
         this.taskDate = taskDate;
     }
-    public Long gettaskStatus() {
+    public Long getTaskStatus() {
         return this.taskStatus;
     }
 
-    public void settaskStatus(Long taskStatus) {
+    public void setTaskStatus(Long taskStatus) {
         this.taskStatus = taskStatus;
     }
-    public Long getrewardType() {
+    public Long getRewardType() {
         return this.rewardType;
     }
 
-    public void setrewardType(Long rewardType) {
+    public void setRewardType(Long rewardType) {
         this.rewardType = rewardType;
     }
-    public Double getreward() {
-        return this.reward;
+    public Double getTaskReward() {
+        return this.taskReward;
     }
 
-    public void setreward(Double reward) {
-        this.reward = reward;
+    public void setTaskReward(Double taskReward) {
+        this.taskReward = taskReward;
     }
-    public String gettaskCondition() {
+    public String getTaskCondition() {
         return this.taskCondition;
     }
 
-    public void settaskCondition(String taskCondition) {
+    public void setTaskCondition(String taskCondition) {
         this.taskCondition = taskCondition;
     }
-    public String getmemo() {
+    public String getMemo() {
         return this.memo;
     }
 
-    public void setmemo(String memo) {
+    public void setMemo(String memo) {
         this.memo = memo;
     }
 

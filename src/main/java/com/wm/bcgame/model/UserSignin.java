@@ -23,32 +23,32 @@ public class UserSignin extends AbstractModel {
     //
     private String memo;
 ///////////////////////////////////////////////////////////////
-    public Long getid() {
+    public Long getId() {
         return this.id;
     }
 
-    public void setid(Long id) {
+    public void setId(Long id) {
         this.id = id;
     }
-    public Long getuserId() {
+    public Long getUserId() {
         return this.userId;
     }
 
-    public void setuserId(Long userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
-    public Date getsigninTime() {
+    public Date getSigninTime() {
         return this.signinTime;
     }
 
-    public void setsigninTime(Date signinTime) {
+    public void setSigninTime(Date signinTime) {
         this.signinTime = signinTime;
     }
-    public String getmemo() {
+    public String getMemo() {
         return this.memo;
     }
 
-    public void setmemo(String memo) {
+    public void setMemo(String memo) {
         this.memo = memo;
     }
 

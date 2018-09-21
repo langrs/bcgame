@@ -22,39 +22,39 @@ public class UserIntegralD extends AbstractModel {
     //
     private Double integral;
 ///////////////////////////////////////////////////////////////
-    public Long getid() {
+    public Long getId() {
         return this.id;
     }
 
-    public void setid(Long id) {
+    public void setId(Long id) {
         this.id = id;
     }
-    public Long getuserId() {
+    public Long getUserId() {
         return this.userId;
     }
 
-    public void setuserId(Long userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
-    public Long getoperationType() {
+    public Long getOperationType() {
         return this.operationType;
     }
 
-    public void setoperationType(Long operationType) {
+    public void setOperationType(Long operationType) {
         this.operationType = operationType;
     }
-    public Long getoperationAttr() {
+    public Long getOperationAttr() {
         return this.operationAttr;
     }
 
-    public void setoperationAttr(Long operationAttr) {
+    public void setOperationAttr(Long operationAttr) {
         this.operationAttr = operationAttr;
     }
-    public Double getintegral() {
+    public Double getIntegral() {
         return this.integral;
     }
 
-    public void setintegral(Double integral) {
+    public void setIntegral(Double integral) {
         this.integral = integral;
     }
 

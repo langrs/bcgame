@@ -36,88 +36,88 @@ public class SysCoin extends AbstractModel {
     //白皮书
     private String whitePaper;
 ///////////////////////////////////////////////////////////////
-    public Long getid() {
+    public Long getId() {
         return this.id;
     }
 
-    public void setid(Long id) {
+    public void setId(Long id) {
         this.id = id;
     }
-    public String getcoinNo() {
+    public String getCoinNo() {
         return this.coinNo;
     }
 
-    public void setcoinNo(String coinNo) {
+    public void setCoinNo(String coinNo) {
         this.coinNo = coinNo;
     }
-    public String getname() {
+    public String getName() {
         return this.name;
     }
 
-    public void setname(String name) {
+    public void setName(String name) {
         this.name = name;
     }
-    public String gettitle() {
+    public String getTitle() {
         return this.title;
     }
 
-    public void settitle(String title) {
+    public void setTitle(String title) {
         this.title = title;
     }
-    public String getdescription() {
+    public String getDescription() {
         return this.description;
     }
 
-    public void setdescription(String description) {
+    public void setDescription(String description) {
         this.description = description;
     }
-    public String getdistributionAmt() {
+    public String getDistributionAmt() {
         return this.distributionAmt;
     }
 
-    public void setdistributionAmt(String distributionAmt) {
+    public void setDistributionAmt(String distributionAmt) {
         this.distributionAmt = distributionAmt;
     }
-    public String getturnoverAmt() {
+    public String getTurnoverAmt() {
         return this.turnoverAmt;
     }
 
-    public void setturnoverAmt(String turnoverAmt) {
+    public void setTurnoverAmt(String turnoverAmt) {
         this.turnoverAmt = turnoverAmt;
     }
-    public String getmarketAmt() {
+    public String getMarketAmt() {
         return this.marketAmt;
     }
 
-    public void setmarketAmt(String marketAmt) {
+    public void setMarketAmt(String marketAmt) {
         this.marketAmt = marketAmt;
     }
-    public String getmarketRank() {
+    public String getMarketRank() {
         return this.marketRank;
     }
 
-    public void setmarketRank(String marketRank) {
+    public void setMarketRank(String marketRank) {
         this.marketRank = marketRank;
     }
-    public String getissueDate() {
+    public String getIssueDate() {
         return this.issueDate;
     }
 
-    public void setissueDate(String issueDate) {
+    public void setIssueDate(String issueDate) {
         this.issueDate = issueDate;
     }
-    public String getwebsiteAddr() {
+    public String getWebsiteAddr() {
         return this.websiteAddr;
     }
 
-    public void setwebsiteAddr(String websiteAddr) {
+    public void setWebsiteAddr(String websiteAddr) {
         this.websiteAddr = websiteAddr;
     }
-    public String getwhitePaper() {
+    public String getWhitePaper() {
         return this.whitePaper;
     }
 
-    public void setwhitePaper(String whitePaper) {
+    public void setWhitePaper(String whitePaper) {
         this.whitePaper = whitePaper;
     }
 

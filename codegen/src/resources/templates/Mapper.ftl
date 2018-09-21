@@ -29,7 +29,7 @@
         <where>
 		<#list model_column as col>
 		<#if col.columnType == "datetime">
-       	<if test="${col.changeColumnName} != null"> AND ${col.columnName} = ${r'#'}{${col.changeColumnName}}</if>
+       	<if test="${col.changeColumnName}Start != null"> AND  ${col.columnName} <![CDATA[ >= ]]> ${r'#'}{${col.changeColumnName}Start} AND ${col.columnName} <![CDATA[ < ]]> ${r'#'}{${col.changeColumnName}End}</if>
         <#else>
        	<if test="${col.changeColumnName} != null"> AND ${col.columnName} like '%${r'$'}{${col.changeColumnName}}%' </if>
         </#if>
@@ -40,7 +40,11 @@
     <sql id="oneWhere">
         <where>
 		<#list model_column as col>
-            <if test="${col.changeColumnName} != null"> AND ${col.columnName} = ${r'#'}{${col.changeColumnName}}</if>
+		<#if col.columnType == "datetime">
+       	<if test="${col.changeColumnName}Start != null"> AND ${col.columnName} <![CDATA[ >= ]]> ${r'#'}{${col.changeColumnName}Start} AND ${col.columnName} <![CDATA[ < ]]> ${r'#'}{${col.changeColumnName}End}</if>
+        <#else>
+       	<if test="${col.changeColumnName} != null"> AND ${col.columnName} = ${r'#'}{${col.changeColumnName}}</if>
+        </#if>
         </#list>
         </where>
     </sql>

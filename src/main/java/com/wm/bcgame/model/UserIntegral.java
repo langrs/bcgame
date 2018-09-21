@@ -26,53 +26,53 @@ public class UserIntegral extends AbstractModel {
     //过期积分
     private Double integralExpired;
 ///////////////////////////////////////////////////////////////
-    public Long getid() {
+    public Long getId() {
         return this.id;
     }
 
-    public void setid(Long id) {
+    public void setId(Long id) {
         this.id = id;
     }
-    public Long getuserId() {
+    public Long getUserId() {
         return this.userId;
     }
 
-    public void setuserId(Long userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
-    public Double getintegral() {
+    public Double getIntegral() {
         return this.integral;
     }
 
-    public void setintegral(Double integral) {
+    public void setIntegral(Double integral) {
         this.integral = integral;
     }
-    public Double getintegralAll() {
+    public Double getIntegralAll() {
         return this.integralAll;
     }
 
-    public void setintegralAll(Double integralAll) {
+    public void setIntegralAll(Double integralAll) {
         this.integralAll = integralAll;
     }
-    public Double getintegralExchanged() {
+    public Double getIntegralExchanged() {
         return this.integralExchanged;
     }
 
-    public void setintegralExchanged(Double integralExchanged) {
+    public void setIntegralExchanged(Double integralExchanged) {
         this.integralExchanged = integralExchanged;
     }
-    public Double getintegralLocked() {
+    public Double getIntegralLocked() {
         return this.integralLocked;
     }
 
-    public void setintegralLocked(Double integralLocked) {
+    public void setIntegralLocked(Double integralLocked) {
         this.integralLocked = integralLocked;
     }
-    public Double getintegralExpired() {
+    public Double getIntegralExpired() {
         return this.integralExpired;
     }
 
-    public void setintegralExpired(Double integralExpired) {
+    public void setIntegralExpired(Double integralExpired) {
         this.integralExpired = integralExpired;
     }
 

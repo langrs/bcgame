@@ -20,32 +20,32 @@ public class UserHistory extends AbstractModel {
     //历史ID
     private Long historyId;
 ///////////////////////////////////////////////////////////////
-    public Long getid() {
+    public Long getId() {
         return this.id;
     }
 
-    public void setid(Long id) {
+    public void setId(Long id) {
         this.id = id;
     }
-    public Long getuserId() {
+    public Long getUserId() {
         return this.userId;
     }
 
-    public void setuserId(Long userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
-    public Long gethistoryType() {
+    public Long getHistoryType() {
         return this.historyType;
     }
 
-    public void sethistoryType(Long historyType) {
+    public void setHistoryType(Long historyType) {
         this.historyType = historyType;
     }
-    public Long gethistoryId() {
+    public Long getHistoryId() {
         return this.historyId;
     }
 
-    public void sethistoryId(Long historyId) {
+    public void setHistoryId(Long historyId) {
         this.historyId = historyId;
     }
 

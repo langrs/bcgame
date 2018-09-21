@@ -5,10 +5,10 @@
 		<id property="id" column="id" jdbcType="NUMERIC" />
 		<result property= "userId" column="user_id" jdbcType="NUMERIC" />
 		<result property= "taskId" column="task_id" jdbcType="NUMERIC" />
-		<result property= "taskDate" column="task_date" jdbcType="TIMESTAMP" />
+		<result property= "taskDate" column="task_date" jdbcType="VARCHAR" />
 		<result property= "taskStatus" column="task_status" jdbcType="NUMERIC" />
 		<result property= "rewardType" column="reward_type" jdbcType="NUMERIC" />
-		<result property= "reward" column="reward" jdbcType="NUMERIC" />
+		<result property= "taskReward" column="task_reward" jdbcType="NUMERIC" />
 		<result property= "taskCondition" column="task_condition" jdbcType="VARCHAR" />
 		<result property= "memo" column="memo" jdbcType="VARCHAR" />
 		<result property= "disabled" column="disabled" jdbcType="NUMERIC" />
@@ -29,7 +29,7 @@
             task_date,
             task_status,
             reward_type,
-            reward,
+            task_reward,
             task_condition,
             memo,
             disabled,
@@ -44,36 +44,36 @@
        	<if test="id != null"> AND id like '%${id}%' </if>
        	<if test="userId != null"> AND user_id like '%${userId}%' </if>
        	<if test="taskId != null"> AND task_id like '%${taskId}%' </if>
-       	<if test="taskDate != null"> AND task_date = #{taskDate}</if>
+       	<if test="taskDate != null"> AND task_date like '%${taskDate}%' </if>
        	<if test="taskStatus != null"> AND task_status like '%${taskStatus}%' </if>
        	<if test="rewardType != null"> AND reward_type like '%${rewardType}%' </if>
-       	<if test="reward != null"> AND reward like '%${reward}%' </if>
+       	<if test="taskReward != null"> AND task_reward like '%${taskReward}%' </if>
        	<if test="taskCondition != null"> AND task_condition like '%${taskCondition}%' </if>
        	<if test="memo != null"> AND memo like '%${memo}%' </if>
        	<if test="disabled != null"> AND disabled like '%${disabled}%' </if>
-       	<if test="createTime != null"> AND create_time = #{createTime}</if>
+       	<if test="createTimeStart != null"> AND  create_time <![CDATA[ >= ]]> #{createTimeStart} AND create_time <![CDATA[ < ]]> #{createTimeEnd}</if>
        	<if test="createBy != null"> AND create_by like '%${createBy}%' </if>
        	<if test="lastModifiedBy != null"> AND last_modified_by like '%${lastModifiedBy}%' </if>
-       	<if test="lastModifiedTime != null"> AND last_modified_time = #{lastModifiedTime}</if>
+       	<if test="lastModifiedTimeStart != null"> AND  last_modified_time <![CDATA[ >= ]]> #{lastModifiedTimeStart} AND last_modified_time <![CDATA[ < ]]> #{lastModifiedTimeEnd}</if>
         </where>
     </sql>
 
     <sql id="oneWhere">
         <where>
-            <if test="id != null"> AND id = #{id}</if>
-            <if test="userId != null"> AND user_id = #{userId}</if>
-            <if test="taskId != null"> AND task_id = #{taskId}</if>
-            <if test="taskDate != null"> AND task_date = #{taskDate}</if>
-            <if test="taskStatus != null"> AND task_status = #{taskStatus}</if>
-            <if test="rewardType != null"> AND reward_type = #{rewardType}</if>
-            <if test="reward != null"> AND reward = #{reward}</if>
-            <if test="taskCondition != null"> AND task_condition = #{taskCondition}</if>
-            <if test="memo != null"> AND memo = #{memo}</if>
-            <if test="disabled != null"> AND disabled = #{disabled}</if>
-            <if test="createTime != null"> AND create_time = #{createTime}</if>
-            <if test="createBy != null"> AND create_by = #{createBy}</if>
-            <if test="lastModifiedBy != null"> AND last_modified_by = #{lastModifiedBy}</if>
-            <if test="lastModifiedTime != null"> AND last_modified_time = #{lastModifiedTime}</if>
+       	<if test="id != null"> AND id = #{id}</if>
+       	<if test="userId != null"> AND user_id = #{userId}</if>
+       	<if test="taskId != null"> AND task_id = #{taskId}</if>
+       	<if test="taskDate != null"> AND task_date = #{taskDate}</if>
+       	<if test="taskStatus != null"> AND task_status = #{taskStatus}</if>
+       	<if test="rewardType != null"> AND reward_type = #{rewardType}</if>
+       	<if test="taskReward != null"> AND task_reward = #{taskReward}</if>
+       	<if test="taskCondition != null"> AND task_condition = #{taskCondition}</if>
+       	<if test="memo != null"> AND memo = #{memo}</if>
+       	<if test="disabled != null"> AND disabled = #{disabled}</if>
+       	<if test="createTimeStart != null"> AND create_time <![CDATA[ >= ]]> #{createTimeStart} AND create_time <![CDATA[ < ]]> #{createTimeEnd}</if>
+       	<if test="createBy != null"> AND create_by = #{createBy}</if>
+       	<if test="lastModifiedBy != null"> AND last_modified_by = #{lastModifiedBy}</if>
+       	<if test="lastModifiedTimeStart != null"> AND last_modified_time <![CDATA[ >= ]]> #{lastModifiedTimeStart} AND last_modified_time <![CDATA[ < ]]> #{lastModifiedTimeEnd}</if>
         </where>
     </sql>
 
@@ -84,10 +84,10 @@
                 #{id,jdbcType=NUMERIC},
                 #{userId,jdbcType=NUMERIC},
                 #{taskId,jdbcType=NUMERIC},
-                #{taskDate,jdbcType=TIMESTAMP},
+                #{taskDate,jdbcType=VARCHAR},
                 #{taskStatus,jdbcType=NUMERIC},
                 #{rewardType,jdbcType=NUMERIC},
-                #{reward,jdbcType=NUMERIC},
+                #{taskReward,jdbcType=NUMERIC},
                 #{taskCondition,jdbcType=VARCHAR},
                 #{memo,jdbcType=VARCHAR},
                 #{disabled,jdbcType=NUMERIC},
@@ -108,10 +108,10 @@
                 id=#{id,jdbcType=NUMERIC},
                 user_id=#{userId,jdbcType=NUMERIC},
                 task_id=#{taskId,jdbcType=NUMERIC},
-                task_date=#{taskDate,jdbcType=TIMESTAMP},
+                task_date=#{taskDate,jdbcType=VARCHAR},
                 task_status=#{taskStatus,jdbcType=NUMERIC},
                 reward_type=#{rewardType,jdbcType=NUMERIC},
-                reward=#{reward,jdbcType=NUMERIC},
+                task_reward=#{taskReward,jdbcType=NUMERIC},
                 task_condition=#{taskCondition,jdbcType=VARCHAR},
                 memo=#{memo,jdbcType=VARCHAR},
                 disabled=#{disabled,jdbcType=NUMERIC},

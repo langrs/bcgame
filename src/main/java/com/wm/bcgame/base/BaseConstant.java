@@ -13,6 +13,10 @@ public class BaseConstant {
 	public static final String STATUS_NOT_FOUND = "404";
 	public static final String STATUS_SERVER_ERROR= "500";
 
+	public static final Long TASK_STATUS_NOT_READY = 0L;
+	public static final Long TASK_STATUS_READY = 1L;
+	public static final Long TASK_STATUS_FINNISH = 2L;
+
 	//发送邮件的公司邮箱
 	public static final String EMAIL_SENDER = "54294536@qq.com";
 //	邮件发送标题
@@ -41,5 +45,7 @@ public class BaseConstant {
 	public static final String EXCHANGE_RATE_RMB_USD = "ExchangeRateRmbUsd";
 //	校验验证码
 	public static final String AUTHOR_CODE = "AuthorCode_";
+//	身份码
+	public static final String VALID_CODE = "ValidCode_";
 
 }

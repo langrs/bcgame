@@ -2,9 +2,9 @@ package com.wm.bcgame.controller;
 
 import com.wm.bcgame.base.BaseConstant;
 import com.wm.bcgame.base.QueryMap;
-import com.wm.bcgame.dto.CoinSingle;
-import com.wm.bcgame.dto.PageDataDto;
-import com.wm.bcgame.dto.ResponseDto;
+import com.wm.bcgame.comm.BusinessException;
+import com.wm.bcgame.comm.Error;
+import com.wm.bcgame.dto.*;
 import com.wm.bcgame.dto.login.GameDto;
 import com.wm.bcgame.dto.login.LoginResponseDto;
 import com.wm.bcgame.dto.login.SlideshowDto;
@@ -16,7 +16,6 @@ import com.wm.bcgame.model.UserNotice;
 import com.wm.bcgame.service.SysCoinService;
 import com.wm.bcgame.service.SysGameService;
 import com.wm.bcgame.service.UserNoticeService;
-import com.wm.bcgame.taskService.BusinessException;
 import com.wm.bcgame.taskService.CoinService;
 import com.wm.bcgame.taskService.CoreException;
 import com.wm.bcgame.taskService.LoginService;
@@ -48,8 +47,7 @@ public class LoginController {
 	@ApiOperation(value = "登录首页信息", notes = "获取公告/轮播图/热度榜")
 	@ApiImplicitParam(name = "userId", value = "用户ID", paramType = "query", required = false, dataType = "Long")
 	@RequestMapping(value = "/api", method =  RequestMethod.POST)
-	public ResponseDto<LoginResponseDto> loginApi(@ApiParam Long userId){
-		ResponseDto<LoginResponseDto> responseDto = new ResponseDto();
+	public LoginResponseDto loginApi(@ApiParam Long userId){
 		LoginResponseDto loginResponseDto = new LoginResponseDto();
 //		获取用户公告
 		List<UserNoticeDto> userNoticeDtos = loginService.getUserNotice(userId);
@@ -61,9 +59,7 @@ public class LoginController {
 		loginResponseDto.setUserNoticeDtos(userNoticeDtos);
 		loginResponseDto.setSlideshowDtos(slideshowDtos);
 		loginResponseDto.setGameDtos(gameDtos);
-		responseDto.setStatus(BaseConstant.STATUS_OK);
-		responseDto.setData(loginResponseDto);
-		return  responseDto;
+		return  loginResponseDto;
 	}
 
 	@ApiOperation(value = "用户阅读公告", notes = "用户阅读公告后台设置该公告为已经阅读")
@@ -74,8 +70,8 @@ public class LoginController {
 	@RequestMapping(value = "/userReadNotice", method =  RequestMethod.POST)
 	public void userReadNotice(@ApiParam Long userId,@ApiParam Long noticeId){
 		UserNotice userNotice = new UserNotice();
-		userNotice.setuserId(userId);
-		userNotice.setnoticeId(noticeId);
+		userNotice.setUserId(userId);
+		userNotice.setNoticeId(noticeId);
 		userNoticeService.create(userNotice);
 	}
 
@@ -87,8 +83,7 @@ public class LoginController {
 			@ApiImplicitParam(name = "pageStart", value = "开始页数", paramType = "query", required = true, dataType = "Long")
 	})
 	@RequestMapping(value = "/getGamePage", method =  RequestMethod.POST)
-	public ResponseDto<PageDataDto<List<GameDto>>> getGamePage(@ApiParam Long type, @ApiParam Long pageSize, @ApiParam Long pageStart){
-		ResponseDto<PageDataDto<List<GameDto>>> responseDto = new ResponseDto<>();
+	public PageDataDto<List<GameDto>> getGamePage(@ApiParam Long type, @ApiParam Long pageSize, @ApiParam Long pageStart){
 		PageDataDto<List<GameDto>> pageDataDto = new PageDataDto<>();
 		Long count = 0L;
 		String coinNo;
@@ -100,15 +95,15 @@ public class LoginController {
 		List<SysGame> sysGames = sysGameService.getListPage(queryMap);
 		for(SysGame sysGame:sysGames){
 			GameDto gameDto = new GameDto();
-			gameDto.setGameName(sysGame.getname());
+			gameDto.setGameName(sysGame.getName());
 //			获取币种编号
-			SysCoin sysCoin = sysCoinService.get(sysGame.getcoinId());
-			coinNo = sysCoin.getcoinNo();
+			SysCoin sysCoin = sysCoinService.get(sysGame.getCoinId());
+			coinNo = sysCoin.getCoinNo();
 			gameDto.setCoinName(coinNo);
-			gameDto.setIcon(sysGame.geticon());
-			gameDto.setHeat(sysGame.getheat());
-			gameDto.setPlayers(sysGame.getplayers());
-			gameDto.setTrend(sysGame.gettrend());
+			gameDto.setIcon(sysGame.getIcon());
+			gameDto.setHeat(sysGame.getHeat());
+			gameDto.setPlayers(sysGame.getPlayers());
+			gameDto.setTrend(sysGame.getTrend());
 //			如果获取全部游戏的话，需要拿到24H的成交量
 			if(type == 1){
 //				获取单个币种实时数据
@@ -131,27 +126,35 @@ public class LoginController {
 		}else {
 			pageDataDto.setTotalPage(count/pageSize);
 		}
-		responseDto.setStatus(BaseConstant.STATUS_OK);
-		responseDto.setData(pageDataDto);
-		return responseDto;
+		return pageDataDto;
 	}
-
 
 	@ApiOperation(value = "异常测试", notes = "异常测试")
 	@ApiImplicitParam(name = "code", value = "编码", paramType = "query", required = true, dataType = "Long")
 	@RequestMapping(value = "/test", method = RequestMethod.POST)
-	public List<SysUser> test(@ApiParam Long code) throws CoreException{
+	public void test(@ApiParam Long code) throws BusinessException{
 		if(code == 0){
-			CoreException businessException = new CoreException();
-			businessException.setErrMsg("有异常抛出呀，兄弟!!!");
+			BusinessException businessException = new BusinessException();
+			businessException.setError(Error.OPERATION_ERROR);
 			throw businessException;
 		}else{
-			List<SysUser> sysUsers = new ArrayList<>();
-			SysUser sysUser = new SysUser();
-			sysUser.setid(211L);
-			sysUser.setuserName("lzm");
-			sysUsers.add(sysUser);
-			return sysUsers;
+//			DataDto<List<CoinKline>> dataDto = new DataDto<>();
+
+//			List<CoinKline> coinKlines = new ArrayList<>();
+//			CoinKline coinKline = new CoinKline();
+//			coinKline.setCloseRmb(2342L);
+//			coinKline.setCloseUsdt(233.2);
+//			coinKline.setTs(2343L);
+//			coinKlines.add(coinKline);
+//			CoinKline coinKline1 = new CoinKline();
+//			coinKline1.setCloseRmb(4444L);
+//			coinKline1.setCloseUsdt(444.2);
+//			coinKline1.setTs(444L);
+//			coinKlines.add(coinKline1);
+////			dataDto.setDataList(coinKlines);
+////			dataDto.setDataList("i love you");
+//			return coinKline1;
+//			return "i love you";
 		}
 	}
 }

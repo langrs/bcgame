@@ -21,25 +21,25 @@ public class UserNotice extends AbstractModel {
     //
     private Long noticeId;
 ///////////////////////////////////////////////////////////////
-    public Long getid() {
+    public Long getId() {
         return this.id;
     }
 
-    public void setid(Long id) {
+    public void setId(Long id) {
         this.id = id;
     }
-    public Long getuserId() {
+    public Long getUserId() {
         return this.userId;
     }
 
-    public void setuserId(Long userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
-    public Long getnoticeId() {
+    public Long getNoticeId() {
         return this.noticeId;
     }
 
-    public void setnoticeId(Long noticeId) {
+    public void setNoticeId(Long noticeId) {
         this.noticeId = noticeId;
     }
 

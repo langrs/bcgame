@@ -9,7 +9,7 @@ import io.swagger.annotations.ApiModelProperty;
  * @mondified
  **/
 public class DataDto<T> {
-	@ApiModelProperty(value = "返回数据列表")
+	@ApiModelProperty(value = "返回数据")
 	private T dataList;
 
 	public T getDataList() {

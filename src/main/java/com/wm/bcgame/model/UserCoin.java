@@ -26,53 +26,53 @@ public class UserCoin extends AbstractModel {
     //币种
     private Long coinId;
 ///////////////////////////////////////////////////////////////
-    public Long getid() {
+    public Long getId() {
         return this.id;
     }
 
-    public void setid(Long id) {
+    public void setId(Long id) {
         this.id = id;
     }
-    public Long getuserId() {
+    public Long getUserId() {
         return this.userId;
     }
 
-    public void setuserId(Long userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
-    public Long getcoinType() {
+    public Long getCoinType() {
         return this.coinType;
     }
 
-    public void setcoinType(Long coinType) {
+    public void setCoinType(Long coinType) {
         this.coinType = coinType;
     }
-    public Double getnum() {
+    public Double getNum() {
         return this.num;
     }
 
-    public void setnum(Double num) {
+    public void setNum(Double num) {
         this.num = num;
     }
-    public Double getamount() {
+    public Double getAmount() {
         return this.amount;
     }
 
-    public void setamount(Double amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
-    public Double getnumLock() {
+    public Double getNumLock() {
         return this.numLock;
     }
 
-    public void setnumLock(Double numLock) {
+    public void setNumLock(Double numLock) {
         this.numLock = numLock;
     }
-    public Long getcoinId() {
+    public Long getCoinId() {
         return this.coinId;
     }
 
-    public void setcoinId(Long coinId) {
+    public void setCoinId(Long coinId) {
         this.coinId = coinId;
     }
 

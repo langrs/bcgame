@@ -34,81 +34,81 @@ public class SysGame extends AbstractModel {
     //备注说明
     private String memo;
 ///////////////////////////////////////////////////////////////
-    public Long getid() {
+    public Long getId() {
         return this.id;
     }
 
-    public void setid(Long id) {
+    public void setId(Long id) {
         this.id = id;
     }
-    public String getname() {
+    public String getName() {
         return this.name;
     }
 
-    public void setname(String name) {
+    public void setName(String name) {
         this.name = name;
     }
-    public String geticon() {
+    public String getIcon() {
         return this.icon;
     }
 
-    public void seticon(String icon) {
+    public void setIcon(String icon) {
         this.icon = icon;
     }
-    public Long getcoinId() {
+    public Long getCoinId() {
         return this.coinId;
     }
 
-    public void setcoinId(Long coinId) {
+    public void setCoinId(Long coinId) {
         this.coinId = coinId;
     }
-    public String getdescription() {
+    public String getDescription() {
         return this.description;
     }
 
-    public void setdescription(String description) {
+    public void setDescription(String description) {
         this.description = description;
     }
-    public String getintroduce() {
+    public String getIntroduce() {
         return this.introduce;
     }
 
-    public void setintroduce(String introduce) {
+    public void setIntroduce(String introduce) {
         this.introduce = introduce;
     }
-    public Long getpos() {
+    public Long getPos() {
         return this.pos;
     }
 
-    public void setpos(Long pos) {
+    public void setPos(Long pos) {
         this.pos = pos;
     }
-    public Long getheat() {
+    public Long getHeat() {
         return this.heat;
     }
 
-    public void setheat(Long heat) {
+    public void setHeat(Long heat) {
         this.heat = heat;
     }
-    public Long getplayers() {
+    public Long getPlayers() {
         return this.players;
     }
 
-    public void setplayers(Long players) {
+    public void setPlayers(Long players) {
         this.players = players;
     }
-    public Long gettrend() {
+    public Long getTrend() {
         return this.trend;
     }
 
-    public void settrend(Long trend) {
+    public void setTrend(Long trend) {
         this.trend = trend;
     }
-    public String getmemo() {
+    public String getMemo() {
         return this.memo;
     }
 
-    public void setmemo(String memo) {
+    public void setMemo(String memo) {
         this.memo = memo;
     }
 

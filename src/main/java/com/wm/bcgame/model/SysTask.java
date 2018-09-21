@@ -35,74 +35,74 @@ public class SysTask extends AbstractModel {
     //备注描述
     private String memo;
 ///////////////////////////////////////////////////////////////
-    public Long getid() {
+    public Long getId() {
         return this.id;
     }
 
-    public void setid(Long id) {
+    public void setId(Long id) {
         this.id = id;
     }
-    public Long gettaskType() {
+    public Long getTaskType() {
         return this.taskType;
     }
 
-    public void settaskType(Long taskType) {
+    public void setTaskType(Long taskType) {
         this.taskType = taskType;
     }
-    public String gettaskName() {
+    public String getTaskName() {
         return this.taskName;
     }
 
-    public void settaskName(String taskName) {
+    public void setTaskName(String taskName) {
         this.taskName = taskName;
     }
-    public String gettaskPic() {
+    public String getTaskPic() {
         return this.taskPic;
     }
 
-    public void settaskPic(String taskPic) {
+    public void setTaskPic(String taskPic) {
         this.taskPic = taskPic;
     }
-    public Long getrewardType() {
+    public Long getRewardType() {
         return this.rewardType;
     }
 
-    public void setrewardType(Long rewardType) {
+    public void setRewardType(Long rewardType) {
         this.rewardType = rewardType;
     }
-    public String gettaskReward() {
+    public String getTaskReward() {
         return this.taskReward;
     }
 
-    public void settaskReward(String taskReward) {
+    public void setTaskReward(String taskReward) {
         this.taskReward = taskReward;
     }
-    public String gettaskCondition() {
+    public String getTaskCondition() {
         return this.taskCondition;
     }
 
-    public void settaskCondition(String taskCondition) {
+    public void setTaskCondition(String taskCondition) {
         this.taskCondition = taskCondition;
     }
-    public Date getexpire() {
+    public Date getExpire() {
         return this.expire;
     }
 
-    public void setexpire(Date expire) {
+    public void setExpire(Date expire) {
         this.expire = expire;
     }
-    public Long gethidden() {
+    public Long getHidden() {
         return this.hidden;
     }
 
-    public void sethidden(Long hidden) {
+    public void setHidden(Long hidden) {
         this.hidden = hidden;
     }
-    public String getmemo() {
+    public String getMemo() {
         return this.memo;
     }
 
-    public void setmemo(String memo) {
+    public void setMemo(String memo) {
         this.memo = memo;
     }
 

@@ -20,32 +20,32 @@ public class UserOnline extends AbstractModel {
     //在线日期
     private String onlineDate;
 ///////////////////////////////////////////////////////////////
-    public Long getid() {
+    public Long getId() {
         return this.id;
     }
 
-    public void setid(Long id) {
+    public void setId(Long id) {
         this.id = id;
     }
-    public Long getuserId() {
+    public Long getUserId() {
         return this.userId;
     }
 
-    public void setuserId(Long userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
-    public Long getduration() {
+    public Long getDuration() {
         return this.duration;
     }
 
-    public void setduration(Long duration) {
+    public void setDuration(Long duration) {
         this.duration = duration;
     }
-    public String getonlineDate() {
+    public String getOnlineDate() {
         return this.onlineDate;
     }
 
-    public void setonlineDate(String onlineDate) {
+    public void setOnlineDate(String onlineDate) {
         this.onlineDate = onlineDate;
     }
 

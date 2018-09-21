@@ -39,25 +39,25 @@
        	<if test="operationAttr != null"> AND operation_attr like '%${operationAttr}%' </if>
        	<if test="integral != null"> AND integral like '%${integral}%' </if>
        	<if test="disabled != null"> AND disabled like '%${disabled}%' </if>
-       	<if test="createTime != null"> AND create_time = #{createTime}</if>
+       	<if test="createTimeStart != null"> AND  create_time <![CDATA[ >= ]]> #{createTimeStart} AND create_time <![CDATA[ < ]]> #{createTimeEnd}</if>
        	<if test="createBy != null"> AND create_by like '%${createBy}%' </if>
-       	<if test="lastModifiedTime != null"> AND last_modified_time = #{lastModifiedTime}</if>
+       	<if test="lastModifiedTimeStart != null"> AND  last_modified_time <![CDATA[ >= ]]> #{lastModifiedTimeStart} AND last_modified_time <![CDATA[ < ]]> #{lastModifiedTimeEnd}</if>
        	<if test="lastModifiedBy != null"> AND last_modified_by like '%${lastModifiedBy}%' </if>
         </where>
     </sql>
 
     <sql id="oneWhere">
         <where>
-            <if test="id != null"> AND id = #{id}</if>
-            <if test="userId != null"> AND user_id = #{userId}</if>
-            <if test="operationType != null"> AND operation_type = #{operationType}</if>
-            <if test="operationAttr != null"> AND operation_attr = #{operationAttr}</if>
-            <if test="integral != null"> AND integral = #{integral}</if>
-            <if test="disabled != null"> AND disabled = #{disabled}</if>
-            <if test="createTime != null"> AND create_time = #{createTime}</if>
-            <if test="createBy != null"> AND create_by = #{createBy}</if>
-            <if test="lastModifiedTime != null"> AND last_modified_time = #{lastModifiedTime}</if>
-            <if test="lastModifiedBy != null"> AND last_modified_by = #{lastModifiedBy}</if>
+       	<if test="id != null"> AND id = #{id}</if>
+       	<if test="userId != null"> AND user_id = #{userId}</if>
+       	<if test="operationType != null"> AND operation_type = #{operationType}</if>
+       	<if test="operationAttr != null"> AND operation_attr = #{operationAttr}</if>
+       	<if test="integral != null"> AND integral = #{integral}</if>
+       	<if test="disabled != null"> AND disabled = #{disabled}</if>
+       	<if test="createTimeStart != null"> AND create_time <![CDATA[ >= ]]> #{createTimeStart} AND create_time <![CDATA[ < ]]> #{createTimeEnd}</if>
+       	<if test="createBy != null"> AND create_by = #{createBy}</if>
+       	<if test="lastModifiedTimeStart != null"> AND last_modified_time <![CDATA[ >= ]]> #{lastModifiedTimeStart} AND last_modified_time <![CDATA[ < ]]> #{lastModifiedTimeEnd}</if>
+       	<if test="lastModifiedBy != null"> AND last_modified_by = #{lastModifiedBy}</if>
         </where>
     </sql>
 

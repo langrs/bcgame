@@ -60,32 +60,32 @@
        	<if test="websiteAddr != null"> AND website_addr like '%${websiteAddr}%' </if>
        	<if test="whitePaper != null"> AND white_paper like '%${whitePaper}%' </if>
        	<if test="disabled != null"> AND disabled like '%${disabled}%' </if>
-       	<if test="createTime != null"> AND create_time = #{createTime}</if>
+       	<if test="createTimeStart != null"> AND  create_time <![CDATA[ >= ]]> #{createTimeStart} AND create_time <![CDATA[ < ]]> #{createTimeEnd}</if>
        	<if test="createBy != null"> AND create_by like '%${createBy}%' </if>
        	<if test="lastModifiedBy != null"> AND last_modified_by like '%${lastModifiedBy}%' </if>
-       	<if test="lastModifiedTime != null"> AND last_modified_time = #{lastModifiedTime}</if>
+       	<if test="lastModifiedTimeStart != null"> AND  last_modified_time <![CDATA[ >= ]]> #{lastModifiedTimeStart} AND last_modified_time <![CDATA[ < ]]> #{lastModifiedTimeEnd}</if>
         </where>
     </sql>
 
     <sql id="oneWhere">
         <where>
-            <if test="id != null"> AND id = #{id}</if>
-            <if test="coinNo != null"> AND coin_no = #{coinNo}</if>
-            <if test="name != null"> AND name = #{name}</if>
-            <if test="title != null"> AND title = #{title}</if>
-            <if test="description != null"> AND description = #{description}</if>
-            <if test="distributionAmt != null"> AND distribution_amt = #{distributionAmt}</if>
-            <if test="turnoverAmt != null"> AND turnover_amt = #{turnoverAmt}</if>
-            <if test="marketAmt != null"> AND market_amt = #{marketAmt}</if>
-            <if test="marketRank != null"> AND market_rank = #{marketRank}</if>
-            <if test="issueDate != null"> AND issue_date = #{issueDate}</if>
-            <if test="websiteAddr != null"> AND website_addr = #{websiteAddr}</if>
-            <if test="whitePaper != null"> AND white_paper = #{whitePaper}</if>
-            <if test="disabled != null"> AND disabled = #{disabled}</if>
-            <if test="createTime != null"> AND create_time = #{createTime}</if>
-            <if test="createBy != null"> AND create_by = #{createBy}</if>
-            <if test="lastModifiedBy != null"> AND last_modified_by = #{lastModifiedBy}</if>
-            <if test="lastModifiedTime != null"> AND last_modified_time = #{lastModifiedTime}</if>
+       	<if test="id != null"> AND id = #{id}</if>
+       	<if test="coinNo != null"> AND coin_no = #{coinNo}</if>
+       	<if test="name != null"> AND name = #{name}</if>
+       	<if test="title != null"> AND title = #{title}</if>
+       	<if test="description != null"> AND description = #{description}</if>
+       	<if test="distributionAmt != null"> AND distribution_amt = #{distributionAmt}</if>
+       	<if test="turnoverAmt != null"> AND turnover_amt = #{turnoverAmt}</if>
+       	<if test="marketAmt != null"> AND market_amt = #{marketAmt}</if>
+       	<if test="marketRank != null"> AND market_rank = #{marketRank}</if>
+       	<if test="issueDate != null"> AND issue_date = #{issueDate}</if>
+       	<if test="websiteAddr != null"> AND website_addr = #{websiteAddr}</if>
+       	<if test="whitePaper != null"> AND white_paper = #{whitePaper}</if>
+       	<if test="disabled != null"> AND disabled = #{disabled}</if>
+       	<if test="createTimeStart != null"> AND create_time <![CDATA[ >= ]]> #{createTimeStart} AND create_time <![CDATA[ < ]]> #{createTimeEnd}</if>
+       	<if test="createBy != null"> AND create_by = #{createBy}</if>
+       	<if test="lastModifiedBy != null"> AND last_modified_by = #{lastModifiedBy}</if>
+       	<if test="lastModifiedTimeStart != null"> AND last_modified_time <![CDATA[ >= ]]> #{lastModifiedTimeStart} AND last_modified_time <![CDATA[ < ]]> #{lastModifiedTimeEnd}</if>
         </where>
     </sql>
 

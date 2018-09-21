@@ -20,32 +20,32 @@ public class SysSlideshow extends AbstractModel {
     //
     private String url;
 ///////////////////////////////////////////////////////////////
-    public Long getid() {
+    public Long getId() {
         return this.id;
     }
 
-    public void setid(Long id) {
+    public void setId(Long id) {
         this.id = id;
     }
-    public String getname() {
+    public String getName() {
         return this.name;
     }
 
-    public void setname(String name) {
+    public void setName(String name) {
         this.name = name;
     }
-    public String getdescription() {
+    public String getDescription() {
         return this.description;
     }
 
-    public void setdescription(String description) {
+    public void setDescription(String description) {
         this.description = description;
     }
-    public String geturl() {
+    public String getUrl() {
         return this.url;
     }
 
-    public void seturl(String url) {
+    public void setUrl(String url) {
         this.url = url;
     }
 

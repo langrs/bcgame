@@ -20,32 +20,32 @@ public class UserFavorite extends AbstractModel {
     //类型ID
     private Long favoriteId;
 ///////////////////////////////////////////////////////////////
-    public Long getid() {
+    public Long getId() {
         return this.id;
     }
 
-    public void setid(Long id) {
+    public void setId(Long id) {
         this.id = id;
     }
-    public Long getuserId() {
+    public Long getUserId() {
         return this.userId;
     }
 
-    public void setuserId(Long userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
-    public Long getfavoriteType() {
+    public Long getFavoriteType() {
         return this.favoriteType;
     }
 
-    public void setfavoriteType(Long favoriteType) {
+    public void setFavoriteType(Long favoriteType) {
         this.favoriteType = favoriteType;
     }
-    public Long getfavoriteId() {
+    public Long getFavoriteId() {
         return this.favoriteId;
     }
 
-    public void setfavoriteId(Long favoriteId) {
+    public void setFavoriteId(Long favoriteId) {
         this.favoriteId = favoriteId;
     }
 

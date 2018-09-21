@@ -1,4 +1,4 @@
-package com.wm.bcgame.dto.login;
+package com.wm.bcgame.dto.integral;
 
 import com.wm.bcgame.base.BaseDto;
 import io.swagger.annotations.ApiModelProperty;
@@ -7,30 +7,21 @@ import java.util.Date;
 
 /**
  * @author LZM
- * @description 公告消息
- * @date 11:27 2018/9/14
+ * @description
+ * @date 12:10 2018/9/21
  * @mondified
  **/
-public class UserNoticeDto extends BaseDto {
+public class TaskNoiceDao extends BaseDto{
 	private static final long serialVersionUID = 1L;
-	@ApiModelProperty(value = "公告ID")
-	private Long id;
-	@ApiModelProperty(value = "公告标题")
+
+	@ApiModelProperty(value = "活动标题")
 	private String title;
-	@ApiModelProperty(value = "公告正文")
+	@ApiModelProperty(value = "活动有效时间")
+	private String noticeTime;
+	@ApiModelProperty(value = "活动内容")
 	private String description;
-	@ApiModelProperty(value = "公告时间")
+	@ApiModelProperty(value = "活动发布时间")
 	private Date createTime;
-	@ApiModelProperty(value = "公告状态:1已读 0未读")
-	private int noticeStatus;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getTitle() {
 		return title;
@@ -38,6 +29,14 @@ public class UserNoticeDto extends BaseDto {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public String getNoticeTime() {
+		return noticeTime;
+	}
+
+	public void setNoticeTime(String noticeTime) {
+		this.noticeTime = noticeTime;
 	}
 
 	public String getDescription() {
@@ -54,13 +53,5 @@ public class UserNoticeDto extends BaseDto {
 
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
-	}
-
-	public int getNoticeStatus() {
-		return noticeStatus;
-	}
-
-	public void setNoticeStatus(int noticeStatus) {
-		this.noticeStatus = noticeStatus;
 	}
 }

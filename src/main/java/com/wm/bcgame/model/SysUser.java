@@ -36,88 +36,88 @@ public class SysUser extends AbstractModel {
     //
     private String passwd;
 ///////////////////////////////////////////////////////////////
-    public Long getid() {
+    public Long getId() {
         return this.id;
     }
 
-    public void setid(Long id) {
+    public void setId(Long id) {
         this.id = id;
     }
-    public Long getuserType() {
+    public Long getUserType() {
         return this.userType;
     }
 
-    public void setuserType(Long userType) {
+    public void setUserType(Long userType) {
         this.userType = userType;
     }
-    public String getuserNo() {
+    public String getUserNo() {
         return this.userNo;
     }
 
-    public void setuserNo(String userNo) {
+    public void setUserNo(String userNo) {
         this.userNo = userNo;
     }
-    public String getuserName() {
+    public String getUserName() {
         return this.userName;
     }
 
-    public void setuserName(String userName) {
+    public void setUserName(String userName) {
         this.userName = userName;
     }
-    public String getemail() {
+    public String getEmail() {
         return this.email;
     }
 
-    public void setemail(String email) {
+    public void setEmail(String email) {
         this.email = email;
     }
-    public String getmobile() {
+    public String getMobile() {
         return this.mobile;
     }
 
-    public void setmobile(String mobile) {
+    public void setMobile(String mobile) {
         this.mobile = mobile;
     }
-    public String getinvite() {
+    public String getInvite() {
         return this.invite;
     }
 
-    public void setinvite(String invite) {
+    public void setInvite(String invite) {
         this.invite = invite;
     }
-    public String getphoto() {
+    public String getPhoto() {
         return this.photo;
     }
 
-    public void setphoto(String photo) {
+    public void setPhoto(String photo) {
         this.photo = photo;
     }
-    public Long getfinger() {
+    public Long getFinger() {
         return this.finger;
     }
 
-    public void setfinger(Long finger) {
+    public void setFinger(Long finger) {
         this.finger = finger;
     }
-    public Long getintegral() {
+    public Long getIntegral() {
         return this.integral;
     }
 
-    public void setintegral(Long integral) {
+    public void setIntegral(Long integral) {
         this.integral = integral;
     }
-    public String getintegralPassword() {
+    public String getIntegralPassword() {
         return this.integralPassword;
     }
 
-    public void setintegralPassword(String integralPassword) {
+    public void setIntegralPassword(String integralPassword) {
         this.integralPassword = integralPassword;
     }
-    public String getpasswd() {
+    public String getPasswd() {
         return this.passwd;
     }
 
-    public void setpasswd(String passwd) {
+    public void setPasswd(String passwd) {
         this.passwd = passwd;
     }
 
