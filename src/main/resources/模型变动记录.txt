@@ -1,4 +1,5 @@
 1.game 用户游戏 分页改造 limit
 
-
+2.userHistory这个增加了统计每日用户登录游戏 所有相关的server 和dao和map
+都要改动
 

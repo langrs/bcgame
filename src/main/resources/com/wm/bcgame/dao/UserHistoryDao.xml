@@ -126,9 +126,12 @@
         SELECT <include refid="columns"/>
         FROM t_user_history
     </select>
+    <!--获取用户每日登录游戏的款数-->
     <select id="getDailyGameCount" resultType="java.lang.Integer">
-        SELECT count(1) as counts
+        SELECT COUNT(DISTINCT(history_id)) as counts
         FROM t_user_history
-        WHERE user_id = #{userId} AND history_id = #{historyId} AND history_type =#{}
+        WHERE user_id = #{userId} AND history_type = 0 AND
+        create_time <![CDATA[ >= ]]> #{startDate} and create_time <![CDATA[ < ]]> #{endDate}
+        GROUP BY history_id
     </select>
 </mapper>

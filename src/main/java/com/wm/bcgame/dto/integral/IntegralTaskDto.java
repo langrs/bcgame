@@ -15,33 +15,33 @@ public class IntegralTaskDto extends BaseDto {
 	private static final long serialVersionUID = 1L;
 
 	@ApiModelProperty(value = "每日任务列表")
-	private List<TaskInfoDao> dailyTask;
+	private List<TaskInfoDto> dailyTask;
 	@ApiModelProperty(value = "成长任务列表")
-	private List<TaskInfoDao> growupTask;
+	private List<TaskInfoDto> growupTask;
 	@ApiModelProperty(value = "活动通知列表")
-	private List<TaskNoiceDao> noticeTask;
+	private List<TaskNoiceDto> noticeTask;
 
-	public List<TaskInfoDao> getDailyTask() {
+	public List<TaskInfoDto> getDailyTask() {
 		return dailyTask;
 	}
 
-	public void setDailyTask(List<TaskInfoDao> dailyTask) {
+	public void setDailyTask(List<TaskInfoDto> dailyTask) {
 		this.dailyTask = dailyTask;
 	}
 
-	public List<TaskInfoDao> getGrowupTask() {
+	public List<TaskInfoDto> getGrowupTask() {
 		return growupTask;
 	}
 
-	public void setGrowupTask(List<TaskInfoDao> growupTask) {
+	public void setGrowupTask(List<TaskInfoDto> growupTask) {
 		this.growupTask = growupTask;
 	}
 
-	public List<TaskNoiceDao> getNoticeTask() {
+	public List<TaskNoiceDto> getNoticeTask() {
 		return noticeTask;
 	}
 
-	public void setNoticeTask(List<TaskNoiceDao> noticeTask) {
+	public void setNoticeTask(List<TaskNoiceDto> noticeTask) {
 		this.noticeTask = noticeTask;
 	}
 }

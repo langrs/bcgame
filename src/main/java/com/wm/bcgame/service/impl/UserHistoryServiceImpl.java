@@ -2,6 +2,7 @@ package com.wm.bcgame.service.impl;
 
 import com.wm.bcgame.base.BaseDao;
 import com.wm.bcgame.base.BaseServiceImpl;
+import com.wm.bcgame.base.QueryMap;
 import com.wm.bcgame.dao.UserHistoryDao;
 import com.wm.bcgame.model.UserHistory;
 import com.wm.bcgame.service.UserHistoryService;
@@ -27,5 +28,11 @@ public class UserHistoryServiceImpl extends BaseServiceImpl<Long, UserHistory> i
 	@Override
 	protected Long getUserId(){
 		return 1L;
+	}
+
+	//	获取用户每日登录的游戏款数
+	@Override
+	public Integer getDailyGameCount(QueryMap queryMap) {
+		return dao.getDailyGameCount(queryMap);
 	}
 }

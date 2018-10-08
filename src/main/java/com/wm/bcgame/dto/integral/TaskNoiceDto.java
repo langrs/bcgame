@@ -11,7 +11,7 @@ import java.util.Date;
  * @date 12:10 2018/9/21
  * @mondified
  **/
-public class TaskNoiceDao extends BaseDto{
+public class TaskNoiceDto extends BaseDto{
 	private static final long serialVersionUID = 1L;
 
 	@ApiModelProperty(value = "活动标题")

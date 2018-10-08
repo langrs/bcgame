@@ -10,7 +10,7 @@ import io.swagger.annotations.ApiModelProperty;
  * @mondified
  **/
 
-public class TaskInfoDao extends BaseDto{
+public class TaskInfoDto extends BaseDto{
 	private static final long serialVersionUID = 1L;
 
 	@ApiModelProperty(value = "任务ID")
