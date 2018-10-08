@@ -1,0 +1,598 @@
+drop table if exists t_sys_coin;
+
+drop table if exists t_sys_game;
+
+drop table if exists t_sys_notice;
+
+drop index i_sys_parm on t_sys_parm;
+
+drop table if exists t_sys_parm;
+
+drop table if exists t_sys_slideshow;
+
+drop table if exists t_sys_task;
+
+drop index i_user_invite on t_sys_user;
+
+drop index i_user_mobile on t_sys_user;
+
+drop table if exists t_sys_user;
+
+drop index i_user_coin on t_user_coin;
+
+drop table if exists t_user_coin;
+
+drop index i_user_coin_d_date on t_user_coin_d;
+
+drop index i_user_coin_d on t_user_coin_d;
+
+drop table if exists t_user_coin_d;
+
+drop index i_user_favorite on t_user_favorite;
+
+drop table if exists t_user_favorite;
+
+drop index i_user_history on t_user_history;
+
+drop table if exists t_user_history;
+
+drop index i_user_integral on t_user_integral;
+
+drop table if exists t_user_integral;
+
+drop index i_user_integral_d on t_user_integral_d;
+
+drop table if exists t_user_integral_d;
+
+drop index i_user_invite on t_user_invite;
+
+drop table if exists t_user_invite;
+
+drop index I_user_notice on t_user_notice;
+
+drop table if exists t_user_notice;
+
+drop index i_user_online on t_user_online;
+
+drop table if exists t_user_online;
+
+drop index i_user_signin on t_user_signin;
+
+drop table if exists t_user_signin;
+
+drop index i_user_tadk on t_user_task;
+
+drop table if exists t_user_task;
+
+/*==============================================================*/
+/* Table: t_sys_coin                                            */
+/*==============================================================*/
+create table t_sys_coin
+(
+   id                   int not null auto_increment,
+   coin_no              varchar(30) not null comment '编码',
+   name                 varchar(30) comment '币种名称',
+   title                varchar(30) comment '标题',
+   description          text comment '描述',
+   distribution_amt     varchar(30) comment '发行总量',
+   turnover_amt         varchar(30) comment '流通总量',
+   market_amt           varchar(30) comment '流通市值',
+   market_rank          varchar(30) comment '市值排名',
+   issue_date           varchar(30) comment '发行时间',
+   website_addr         varchar(30) comment '官网地址',
+   white_paper          varchar(30) comment '白皮书',
+   disabled             smallint not null default 0,
+   create_time          datetime not null,
+   create_by            int not null,
+   last_modified_by     int,
+   last_modified_time   datetime,
+   primary key (id)
+);
+
+alter table t_sys_coin comment '币种表';
+
+/*==============================================================*/
+/* Table: t_sys_game                                            */
+/*==============================================================*/
+create table t_sys_game
+(
+   id                   int not null auto_increment,
+   name                 varchar(50) not null comment '游戏名称',
+   icon                 varchar(255) comment '游戏图标',
+   coin_id              int not null comment '代币',
+   description          varchar(100) comment '描述',
+   introduce            text comment '介绍',
+   pos                  smallint default 0 comment '排序权重',
+   heat                 smallint default 0 comment '热度',
+   players              int default 0 comment '参与人数',
+   trend                smallint default 0 comment '趋势',
+   memo                 varchar(255) comment '备注说明',
+   disabled             smallint not null default 0,
+   create_time          datetime not null,
+   create_by            int not null,
+   last_modified_time   datetime,
+   last_modified_by     int,
+   primary key (id)
+);
+
+alter table t_sys_game comment '游戏';
+
+/*==============================================================*/
+/* Table: t_sys_notice                                          */
+/*==============================================================*/
+create table t_sys_notice
+(
+   id                   int not null auto_increment,
+   notice_type          smallint not null comment '类型',
+   title                varchar(100) not null comment '标题',
+   notice_time          varchar(50) comment '公告时间',
+   description          text comment '正文',
+   expiry               datetime comment '失效日期',
+   disabled             smallint not null default 0,
+   create_time          datetime not null,
+   create_by            int not null,
+   last_modified_time   datetime,
+   last_modified_by     int,
+   primary key (id)
+);
+
+alter table t_sys_notice comment '公告
+notice_type类型:0通知公告 1活动公告';
+
+/*==============================================================*/
+/* Table: t_sys_parm                                            */
+/*==============================================================*/
+create table t_sys_parm
+(
+   id                   int not null auto_increment,
+   parm_code            int not null,
+   parm_values          varchar(255) not null,
+   description          varchar(50),
+   disabled             smallint not null default 0,
+   create_time          datetime not null,
+   create_by            int not null,
+   last_modified_time   datetime,
+   last_modified_by     int,
+   primary key (id)
+);
+
+alter table t_sys_parm comment '系统参数表';
+
+/*==============================================================*/
+/* Index: i_sys_parm                                            */
+/*==============================================================*/
+create index i_sys_parm on t_sys_parm
+(
+   parm_code,
+   parm_values
+);
+
+/*==============================================================*/
+/* Table: t_sys_slideshow                                       */
+/*==============================================================*/
+create table t_sys_slideshow
+(
+   id                   int not null auto_increment,
+   name                 varchar(20),
+   description          varchar(50),
+   url                  varchar(255) not null,
+   disabled             smallint not null default 0,
+   create_time          datetime not null,
+   create_by            int not null,
+   last_modified_time   datetime,
+   last_modified_by     int,
+   primary key (id)
+);
+
+alter table t_sys_slideshow comment '轮播图';
+
+/*==============================================================*/
+/* Table: t_sys_task                                            */
+/*==============================================================*/
+create table t_sys_task
+(
+   id                   int not null auto_increment,
+   task_type            smallint not null comment '任务类型',
+   task_name            varchar(50) not null comment '任务描述',
+   task_pic             varchar(255) comment '任务图标',
+   reward_type          smallint comment '回报类型',
+   task_reward          varchar(255) comment '任务回报',
+   task_condition       varchar(255) comment '任务条件',
+   expire               datetime comment '截止日期',
+   hidden               smallint not null default 0 comment '是否显示',
+   memo                 varchar(255) comment '备注描述',
+   disabled             smallint not null default 0,
+   create_time          datetime not null,
+   create_by            int not null,
+   last_modified_time   datetime,
+   last_modified_by     int,
+   primary key (id)
+);
+
+alter table t_sys_task comment '任务表
+task_type:0每日任务1成长任务
+reward_type：0积分';
+
+/*==============================================================*/
+/* Table: t_sys_user                                            */
+/*==============================================================*/
+create table t_sys_user
+(
+   id                   int not null auto_increment,
+   user_type            int not null default 0 comment '用户类型',
+   user_no              varchar(20) comment '用户编码',
+   user_name            varchar(50) comment '用户名称',
+   email                varchar(100) comment '邮箱',
+   mobile               varchar(11) not null comment '手机',
+   invite               varchar(11) comment '邀请码',
+   photo                varchar(255) comment '头像url',
+   finger               smallint default 0 comment '开启指纹密码',
+   integral             smallint not null default 0 comment '是否启用积分密码',
+   integral_password    varchar(30) comment '积分密码',
+   passwd               varchar(30),
+   disabled             smallint not null default 0,
+   create_time          datetime not null,
+   create_by            int not null,
+   last_modified_time   datetime,
+   last_modified_by     int,
+   primary key (id)
+);
+
+alter table t_sys_user comment '用户表';
+
+/*==============================================================*/
+/* Index: i_user_mobile                                         */
+/*==============================================================*/
+create index i_user_mobile on t_sys_user
+(
+   mobile
+);
+
+/*==============================================================*/
+/* Index: i_user_invite                                         */
+/*==============================================================*/
+create index i_user_invite on t_sys_user
+(
+   invite
+);
+
+/*==============================================================*/
+/* Table: t_user_coin                                           */
+/*==============================================================*/
+create table t_user_coin
+(
+   id                   int not null auto_increment,
+   user_id              int not null,
+   coin_type            smallint not null comment '币种类型',
+   num                  numeric(18,6) default 0 comment '数量',
+   amount               numeric(18,2) default 0 comment '金额',
+   num_lock             numeric(18,6) default 0,
+   coin_id              int not null comment '币种',
+   disabled             smallint not null default 0,
+   create_time          datetime not null,
+   create_by            int not null,
+   last_modified_by     int,
+   last_modified_time   datetime,
+   primary key (id)
+);
+
+alter table t_user_coin comment '用户代币信息';
+
+/*==============================================================*/
+/* Index: i_user_coin                                           */
+/*==============================================================*/
+create index i_user_coin on t_user_coin
+(
+   user_id,
+   coin_id
+);
+
+/*==============================================================*/
+/* Table: t_user_coin_d                                         */
+/*==============================================================*/
+create table t_user_coin_d
+(
+   id                   int not null auto_increment,
+   user_id              int not null comment '用户',
+   coin_id              int not null comment '币种',
+   operation_type       smallint not null comment '操作类型',
+   num                  numeric(18,6) default 0 comment '操作数量',
+   amout                numeric(18,2) default 0 comment '操作金额',
+   disabled             smallint not null default 0,
+   create_time          datetime not null,
+   create_by            int not null,
+   last_modified_time   datetime,
+   last_modified_by     int,
+   primary key (id)
+);
+
+alter table t_user_coin_d comment '币种操作表';
+
+/*==============================================================*/
+/* Index: i_user_coin_d                                         */
+/*==============================================================*/
+create index i_user_coin_d on t_user_coin_d
+(
+   user_id,
+   coin_id,
+   operation_type
+);
+
+/*==============================================================*/
+/* Index: i_user_coin_d_date                                    */
+/*==============================================================*/
+create index i_user_coin_d_date on t_user_coin_d
+(
+   user_id,
+   coin_id,
+   create_time,
+   operation_type
+);
+
+/*==============================================================*/
+/* Table: t_user_favorite                                       */
+/*==============================================================*/
+create table t_user_favorite
+(
+   id                   int not null auto_increment,
+   user_id              int not null,
+   favorite_type        smallint not null comment '收藏类型',
+   favorite_id          int not null comment '类型ID',
+   disabled             smallint not null default 0,
+   create_time          datetime not null,
+   create_by            int not null,
+   last_modified_time   datetime,
+   last_modified_by     int,
+   primary key (id)
+);
+
+alter table t_user_favorite comment '用户收藏
+
+favorite_type:0游戏1币种';
+
+/*==============================================================*/
+/* Index: i_user_favorite                                       */
+/*==============================================================*/
+create index i_user_favorite on t_user_favorite
+(
+   user_id,
+   favorite_type,
+   favorite_id
+);
+
+/*==============================================================*/
+/* Table: t_user_history                                        */
+/*==============================================================*/
+create table t_user_history
+(
+   id                   int not null auto_increment,
+   user_id              int not null,
+   history_type         smallint not null comment '历史类型',
+   history_id           int not null comment '历史ID',
+   disabled             smallint not null default 0,
+   create_time          datetime not null,
+   create_by            int not null,
+   last_modified_time   datetime,
+   last_modified_by     int,
+   primary key (id)
+);
+
+alter table t_user_history comment '历史登录记录
+history_type:0登录游戏';
+
+/*==============================================================*/
+/* Index: i_user_history                                        */
+/*==============================================================*/
+create index i_user_history on t_user_history
+(
+   user_id,
+   history_type,
+   history_id
+);
+
+/*==============================================================*/
+/* Table: t_user_integral                                       */
+/*==============================================================*/
+create table t_user_integral
+(
+   id                   int not null auto_increment,
+   user_id              int not null,
+   integral             numeric(18,2) default 0 comment '可用积分',
+   integral_all         numeric(18,2) default 0 comment '总产生积分',
+   integral_exchanged   numeric(18,2) default 0 comment '兑换积分',
+   integral_locked      numeric(18,2) default 0 comment '锁定积分',
+   integral_expired     numeric(18,2) default 0 comment '过期积分',
+   disabled             smallint not null default 0,
+   create_time          datetime not null,
+   create_by            int not null,
+   last_modified_time   datetime,
+   last_modified_by     int,
+   primary key (id)
+);
+
+/*==============================================================*/
+/* Index: i_user_integral                                       */
+/*==============================================================*/
+create index i_user_integral on t_user_integral
+(
+   user_id
+);
+
+/*==============================================================*/
+/* Table: t_user_integral_d                                     */
+/*==============================================================*/
+create table t_user_integral_d
+(
+   id                   int not null auto_increment,
+   user_id              int not null,
+   operation_type       smallint not null comment '操作类型',
+   operation_attr       smallint default 0 comment '类型细分',
+   integral             numeric(18,2),
+   disabled             smallint not null default 0,
+   create_time          datetime not null,
+   create_by            int not null,
+   last_modified_time   datetime,
+   last_modified_by     int,
+   primary key (id)
+);
+
+alter table t_user_integral_d comment '用户积分明细
+operation_type:
+操作类型
+0每日签到 1在线奖励 2累';
+
+/*==============================================================*/
+/* Index: i_user_integral_d                                     */
+/*==============================================================*/
+create index i_user_integral_d on t_user_integral_d
+(
+   user_id,
+   operation_type
+);
+
+/*==============================================================*/
+/* Table: t_user_invite                                         */
+/*==============================================================*/
+create table t_user_invite
+(
+   id                   int not null auto_increment,
+   user_id              int not null comment '邀请用户',
+   invited_user_id      int not null comment '被邀用户',
+   memo                 varchar(255) comment '备注',
+   disabled             smallint not null default 0,
+   create_time          datetime not null,
+   create_by            int not null,
+   last_modified_time   datetime,
+   last_modified_by     int,
+   primary key (id)
+);
+
+alter table t_user_invite comment '邀请码使用记录';
+
+/*==============================================================*/
+/* Index: i_user_invite                                         */
+/*==============================================================*/
+create index i_user_invite on t_user_invite
+(
+   user_id,
+   invited_user_id
+);
+
+/*==============================================================*/
+/* Table: t_user_notice                                         */
+/*==============================================================*/
+create table t_user_notice
+(
+   id                   int not null auto_increment,
+   user_id              int not null,
+   notice_id            int not null,
+   disabled             smallint not null default 0,
+   create_time          datetime not null,
+   create_by            int not null,
+   last_modified_time   datetime,
+   last_modified_by     int,
+   primary key (id)
+);
+
+alter table t_user_notice comment '用户查看公告记录';
+
+/*==============================================================*/
+/* Index: I_user_notice                                         */
+/*==============================================================*/
+create index I_user_notice on t_user_notice
+(
+   user_id,
+   notice_id
+);
+
+/*==============================================================*/
+/* Table: t_user_online                                         */
+/*==============================================================*/
+create table t_user_online
+(
+   id                   int not null auto_increment,
+   user_id              int not null,
+   duration             smallint comment '在线分钟时长',
+   online_date          varchar(10) not null comment '在线日期',
+   disabled             smallint not null default 0,
+   create_time          datetime not null,
+   create_by            int not null,
+   last_modified_time   datetime,
+   last_modified_by     int,
+   primary key (id)
+);
+
+alter table t_user_online comment '每日在线时长';
+
+/*==============================================================*/
+/* Index: i_user_online                                         */
+/*==============================================================*/
+create index i_user_online on t_user_online
+(
+   user_id,
+   online_date
+);
+
+/*==============================================================*/
+/* Table: t_user_signin                                         */
+/*==============================================================*/
+create table t_user_signin
+(
+   id                   int not null auto_increment,
+   user_id              int not null,
+   signin_time          datetime not null,
+   memo                 varchar(30),
+   disabled             smallint not null default 0,
+   create_time          datetime not null,
+   create_by            int not null,
+   last_modified_time   datetime,
+   last_modified_by     int,
+   primary key (id)
+);
+
+alter table t_user_signin comment '用户签到记录';
+
+/*==============================================================*/
+/* Index: i_user_signin                                         */
+/*==============================================================*/
+create index i_user_signin on t_user_signin
+(
+   user_id,
+   signin_time
+);
+
+/*==============================================================*/
+/* Table: t_user_task                                           */
+/*==============================================================*/
+create table t_user_task
+(
+   id                   int not null auto_increment,
+   user_id              int not null,
+   task_id              int not null,
+   task_date            char(10) comment '任务日期',
+   task_status          smallint comment '任务状态',
+   reward_type          smallint comment '奖励类型',
+   task_reward          numeric(18,6) comment '奖励',
+   task_condition       varchar(50) comment '任务条件',
+   memo                 varchar(100),
+   disabled             smallint not null default 0,
+   create_time          datetime not null,
+   create_by            int not null,
+   last_modified_by     int,
+   last_modified_time   datetime,
+   primary key (id)
+);
+
+alter table t_user_task comment '用户执行任务记录
+status:0未满足 1已满足 1已领取 
+如果是第二天登录这样的任务，可以';
+
+/*==============================================================*/
+/* Index: i_user_tadk                                           */
+/*==============================================================*/
+create index i_user_tadk on t_user_task
+(
+   user_id,
+   task_date,
+   task_id
+);
